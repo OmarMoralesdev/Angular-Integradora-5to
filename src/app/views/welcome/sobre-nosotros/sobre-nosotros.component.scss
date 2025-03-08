@@ -1,0 +1,130 @@
+
+
+section{
+    width: 80%;
+    margin: 80px auto;
+}
+.titulo{
+    text-align: center;
+    font-size: 4vmin;
+    color: #089ce2;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    // width: 100%;
+    justify-content: space-between;
+}
+
+.row .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.row .col img{
+    width: 550px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.eventos .row{
+    margin-top: 50px;
+}
+
+h4{
+    font-size: 4vmin;
+    text-align: center;
+    color: #089ce2;
+    margin: 20px auto;
+}
+p{
+    color: black;
+    padding: 0px 40px;
+    text-align: center;
+}
+
+.row .col p{
+    font-size: 3vmin;
+}
+
+
+.explorar{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-image: url('/elementos/dispositivos.png');
+    background-position: center;
+    background-size: contain; 
+    background-repeat: no-repeat;
+   
+}
+
+.explorar-contenido{
+   width: 50%;
+   padding: 50px;
+}
+
+.explorar-contenido h1{
+    font-size: 8vmin;
+    color: #089ce2;
+    margin: 20px;
+}
+
+.explorar-contenido p{
+    width: 60%;
+    font-size: 3vmin;
+    color: black;
+}
+@media screen and (max-width: 800px){
+   .row{
+       flex-direction: column;
+       
+   }
+    
+   .row .col img{
+       width: 300px;
+       height: 200px;
+   }
+
+   .row .col p{
+     text-align: center ;
+     font-size: 3.5vmin;
+   }
+
+   .eventos{
+        width: 100%;
+        margin: 30px 0;
+   }
+   section{
+    margin: 0;
+   }
+   .explorar{
+    height: auto;
+   }
+
+   .header-contenido{
+    margin-bottom: 40px;
+   }
+   .header-contenido h1{
+    margin-top: 0px;
+   }
+   .explorar-contenido{
+    padding: 0px;
+   }
+   header{
+    height: 80%;
+   }
+   .ctn{
+    padding: 15px 30px;
+   }
+   .explorar-contenido p{
+    padding: 90px 20px;
+   }
+   h4{
+    font-size: 5vmin;
+   }
+}

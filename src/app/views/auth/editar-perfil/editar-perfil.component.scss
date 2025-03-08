@@ -1,0 +1,82 @@
+.fondo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
+    height: 100%;
+}
+
+.fondoFormulario{
+    background: #FFFF;
+    border-radius: 30px;
+    box-shadow: 0 0px 30px rgba(0.2, 0.2, 0.2, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5C6BC0;
+    flex-direction: column;
+    padding: 10px 100px 60px 100px;
+}
+
+.iconoPerfil {
+    font-size: 110px;
+}
+
+.input-box{
+    position: relative;
+    margin: 30px 0;
+    border: #5C6BC0 1px solid;
+    border-radius: 8px;
+}
+
+.input-box input{
+    width: 100%;
+    padding: 10px 50px 10px 20px;
+    background: #FFFF;
+    border-radius: 8px;
+    border : none;
+    outline: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.input-box input::placeholder{
+    color: #888;
+    font-weight: 400;
+}
+
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    color: #5C6BC0;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+.btn{
+    width: 100%;
+    height: 48px;
+    background: #5C6BC0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border : none;
+    color: #FFFF;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 550px){
+    .fondo{
+        background: none;
+    }
+    .fondoFormulario{
+        width: 100%;
+        border-radius: 0;
+        padding: 0;
+        padding-bottom: 30px;
+    }
+}

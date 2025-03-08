@@ -1,0 +1,32 @@
+.carousel-container {
+    background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel-inner img {
+    max-width: 100%; /* Asegura que la imagen no sobrepase su tamaño original */
+    max-height: 350px; /* Ajusta la altura sin deformar */
+    object-fit: contain; /* Evita que la imagen se deforme */
+  }
+  
+  .carousel-caption {
+    background: #d3daff6a;
+    
+    h5 {
+        font-size: 2rem;
+        color: #000;
+    }
+    
+    p {
+        font-size: 1.2rem;
+        color: #000;
+    }
+
+   
+    
+    
+}

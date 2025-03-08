@@ -1,0 +1,17 @@
+<div class="fondo">
+    <div class="fondoFormulario">
+        <i class="bi bi-person-vcard-fill iconoPerfil"></i>
+        <form [formGroup]="FormularioEditarContrasena">
+            <h1>Editar Contraseña</h1>
+            <div class="input-box">
+                <input type="password" formControlName="password" placeholder="Password">
+                <i class="bi bi-lock-fill"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" formControlName="confirmpassword" placeholder="Confirm password">
+                <i class="bi bi-lock-fill"></i>
+            </div>
+            <button type="button" (click)="onEdit()" class="btn">Guardar Cambios</button>
+        </form>
+    </div>
+</div>

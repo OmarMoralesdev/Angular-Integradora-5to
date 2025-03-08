@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let sensor of sensors">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h3 class="card-title">{{ sensor.name }}</h3>
+          </div>
+          <div class="card-body">
+            <ngx-charts-bar-vertical
+              [view]="[300, 200]"
+              [scheme]="'vivid'"
+              [results]="[{ name: sensor.name, value: sensor.value || 0 }]"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
