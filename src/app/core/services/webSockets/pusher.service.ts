@@ -11,16 +11,24 @@ export class PusherService {
   private sensorUpdated = new Subject<any>();
 
   constructor() {
-    this.pusher = new Pusher('53762c97ff6f60f10ff4', {
-      cluster: 'us2'
+    this.pusher = new Pusher('local', {
+      cluster: 'local',
+      wsHost: '127.0.0.1',
+      wsPort: 6001,
+      forceTLS: false,
+      disableStats: true,
     });
+
     this.channel = this.pusher.subscribe('sensores');
+
     this.channel.bind('sensor-actualizado', (data: any) => {
+      console.log('Mensaje recibido:', data);
       this.sensorUpdated.next(data);
+
     });
   }
 
   getSensorUpdates() {
     return this.sensorUpdated.asObservable();
-  }
+  }  
 }

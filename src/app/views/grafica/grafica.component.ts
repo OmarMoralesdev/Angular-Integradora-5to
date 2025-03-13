@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { GraficaService } from '../../core/services/websockets/grafica.service';
-import { PusherService } from '../../core/services/websockets/pusher.service';
+import { GraficaService } from '../../core/services/webSockets/grafica.service';
+import { PusherService } from '../../core/services/webSockets/pusher.service';
 
 
 @Component({
