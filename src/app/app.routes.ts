@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { GraficaComponent } from '../app/componets/grafica/grafica.component';
 import { IndexComponent } from './views/welcome/index/index.component';
 import { LoginComponent } from './views/auth/login/login.component';
 import { RegisterComponent } from './views/auth/register/register.component';
 import { NuestrosSensoresComponent } from './views/welcome/nuestros-sensores/nuestros-sensores.component';
 import { SobreNosotrosComponent } from './views/welcome/sobre-nosotros/sobre-nosotros.component';
 import { ParaQuienComponent } from './views/welcome/para-quien/para-quien.component';
+import { GraficaComponent } from './views/grafica/grafica.component';
 
 export const routes: Routes = [
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { GraficaService } from '../../services/grafica.service';
-import { PusherService } from '../../services/pusher.service';
+import { GraficaService } from '../../core/services/websockets/grafica.service';
+import { PusherService } from '../../core/services/websockets/pusher.service';
+
 
 @Component({
   selector: 'app-grafica',

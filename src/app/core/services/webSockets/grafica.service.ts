@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GraficaService {
-  private apiUrl = 'http://192.168.252.178:8000/api/v1/sensor';
+  private apiUrl = 'http://192.168.252.173:8000/api/v1/sensor';
 
   
   private http  = inject(HttpClient);

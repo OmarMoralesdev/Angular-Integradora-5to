@@ -2,6 +2,8 @@ import { Component, inject} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router,RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Login } from '../../../core/models/login';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
   // MI TOSTADA
   private tostada = inject(ToastrService);
+  private ruta = inject(Router);
+  private service = inject(AuthService)
 
   // CREACION DE FORMULARIO
   FormularioLogin = new FormGroup({
@@ -41,7 +45,24 @@ export class LoginComponent {
 
   onLogin() {
     if (this.FormularioLogin.valid){
+      const valores = this.FormularioLogin.value;
+      const credenciales:Login = {
+        email: valores.email || '',
+        password: valores.password || ''
+      }
 
+      this.service.login(credenciales).subscribe({
+        next: (response) => {
+          localStorage.setItem('token',response.token);
+          this.tostada.success('Login exitoso');
+          this.ruta.navigate(['/Graficas']);
+          this.FormularioLogin.reset();
+        },
+        error: (error) => {
+          console.error(error);
+          this.tostada.error('credenciales invalidas', 'Error');
+        }
+      });
     }
     else {
       const campos: { [key: string]: string } = {email: 'Email', password: 'Contraseña' };
