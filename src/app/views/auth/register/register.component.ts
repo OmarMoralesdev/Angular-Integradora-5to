@@ -20,9 +20,16 @@ export class RegisterComponent {
 
   // CREACION DE FORMULARIO
   FormularioRegister = new FormGroup({
-    name: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    lastname2: new FormControl('', ),
+    name: new FormControl('', [Validators.required,
+      Validators.pattern('^[a-zA-Z ]*$'),
+       Validators.minLength(3),
+        Validators.maxLength(50)]),
+    lastname: new FormControl('', [Validators.required,
+      Validators.pattern('^[a-zA-Z ]*$'),
+       Validators.minLength(3),
+        Validators.maxLength(50)]
+    ),
+    secondLastname: new FormControl('', ),
     birthdate: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -54,7 +61,7 @@ export class RegisterComponent {
       const registerData: Register = {
         name: formValues.name || '',
         lastname: formValues.lastname || '',
-        lastname2: formValues.lastname2 || '',
+        secondLastname: formValues.secondLastname || '',
         birthdate: formValues.birthdate || '',
         email: formValues.email || '',
         password: formValues.password || '',

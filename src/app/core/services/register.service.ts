@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RegisterService {
-  private apiUrl = 'http://192.168.252.173:8000/api/v1/auth/register';
+  private apiUrl = 'http://127.0.0.1:8000/api/v1/auth/register';
 
   private http = inject(HttpClient);
 

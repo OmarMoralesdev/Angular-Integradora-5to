@@ -1,7 +1,7 @@
 export interface Register {
     name : string;
     lastname : string;
-    lastname2 : string;
+    secondLastname : string;
     birthdate : string;
     email : string;
     password : string;

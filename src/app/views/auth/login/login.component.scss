@@ -135,6 +135,7 @@ form{
 @media screen and (max-width: 800px){
     .L{
         background: none;
+        height: 100%;
     }
     .container{
         height: 75%;
@@ -157,5 +158,9 @@ form{
         height: 30%;
         border-radius: 40px;
     }
+    .toggle-box{
+        width: 90%;
+    }
     
 }
+
