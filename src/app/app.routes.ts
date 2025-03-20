@@ -6,6 +6,7 @@ import { NuestrosSensoresComponent } from './views/welcome/nuestros-sensores/nue
 import { SobreNosotrosComponent } from './views/welcome/sobre-nosotros/sobre-nosotros.component';
 import { ParaQuienComponent } from './views/welcome/para-quien/para-quien.component';
 import { GraficaComponent } from './views/grafica/grafica.component';
+import { EnviarCorreoComponent } from './views/auth/enviar-correo/enviar-correo/enviar-correo.component';
 
 export const routes: Routes = [
 
@@ -34,6 +35,10 @@ export const routes: Routes = [
         component: RegisterComponent
     },
     {
+        path: 'enviar-correo',
+        component: EnviarCorreoComponent
+    },
+    {
         // RUTA PARA LOS SENSORES QUE OFRECEMOS
         path: 'NuestrosSensores',
         component: NuestrosSensoresComponent
@@ -53,4 +58,5 @@ export const routes: Routes = [
         path: 'Graficas',
         component: GraficaComponent
     }
+
 ];

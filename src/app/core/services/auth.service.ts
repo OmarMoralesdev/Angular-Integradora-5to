@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login';
+import { environment } from '../../../environments/environment';
+import { EnviarCorreo } from '../models/enviar-correo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://192.168.252.173:8000/api/v1/auth/login';
+  private apiUrl = environment.apiUrl + '/auth/';
 
   constructor(private http: HttpClient) {
    }
@@ -17,7 +19,12 @@ export class AuthService {
   login(apiLogin: Login): Observable<any> {
     const respuesta = Observable<any>;
     console.log(respuesta);
-    return this.http.post(this.apiUrl, apiLogin);
+    return this.http.post(this.apiUrl + 'login', apiLogin);
   }
-  
+
+
+  enviarCorreo(data: EnviarCorreo): Observable<any> {
+    return this.http.post(this.apiUrl + 'enviar-correo-de-restablecimiento', data);
+  }
+
 }
