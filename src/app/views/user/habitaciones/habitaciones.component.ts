@@ -21,6 +21,7 @@ export class HabitacionesComponent implements OnInit {
   mostrarHabitacion() {
     this.habitacionservice.getHabitacion().subscribe({
       next: (response) => {
+        console.log(response)
         this.habitaciones = response.data;       
       },
       error: (e) => {
