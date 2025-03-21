@@ -8,6 +8,7 @@ import { ParaQuienComponent } from './views/welcome/para-quien/para-quien.compon
 import { GraficaComponent } from './views/grafica/grafica.component';
 import { EnviarCorreoComponent } from './views/auth/enviar-correo/enviar-correo/enviar-correo.component';
 import { SensoresHabitacionComponent } from './views/user/sensores/sensores-habitacion/sensores-habitacion.component';
+import{HabitacionesComponent} from './views/user/habitaciones/habitaciones.component';
 
 export const routes: Routes = [
 
@@ -63,6 +64,12 @@ export const routes: Routes = [
         //RUTA PARA VER QUE SENSORES TIENE LA HABITACION // ACTIVAR O DESACTIVARLOS 
         path: 'sensorHabitacion',
         component: SensoresHabitacionComponent
+    },
+    {
+        //RUTA PARA VER MIS HABITACIONES 
+        path: 'misHabitaciones',
+        component: HabitacionesComponent
     }
+
 
 ];

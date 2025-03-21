@@ -1,0 +1,17 @@
+<div>
+    <h2>Mis habitaciones</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Sensores</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let habitacion of habitaciones">
+                <td>{{habitacion.name}}</td>
+                <td>{{habitacion.usuario_id}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
