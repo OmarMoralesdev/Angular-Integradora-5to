@@ -9,6 +9,7 @@ import { GraficaComponent } from './views/grafica/grafica.component';
 import { EnviarCorreoComponent } from './views/auth/enviar-correo/enviar-correo/enviar-correo.component';
 import { UserDashboardComponent } from './views/dashboard/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './views/dashboard/admin-dashboard/admin-dashboard.component';
+import { SensoresHabitacionComponent } from './views/user/sensores/sensores-habitacion/sensores-habitacion.component';
 
 export const routes: Routes = [
 
@@ -67,6 +68,11 @@ export const routes: Routes = [
     {
         path: 'Admin-Dashboard',
         component: AdminDashboardComponent
+    },
+    {
+        //RUTA PARA VER QUE SENSORES TIENE LA HABITACION // ACTIVAR O DESACTIVARLOS 
+        path: 'sensorHabitacion',
+        component: SensoresHabitacionComponent
     }
 
 ];
