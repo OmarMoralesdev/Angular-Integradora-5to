@@ -5,6 +5,7 @@ import { Login } from '../models/login';
 import { environment } from '../../../environments/environment';
 import { EnviarCorreo } from '../models/enviar-correo';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +33,68 @@ private router = inject(Router);
    logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/Index']);
+  }
+
+  // METODO PARA SABER SI ES UN ADMINISTRADOR
+  isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log("Token no encontrado");
+      return false; 
+    }
+  
+    try {
+     
+      const decodedToken: any = jwtDecode(token);
+  
+      console.log("Token decodificado:", decodedToken); 
+  
+      return decodedToken?.rol_id === 1;
+    } catch (error) {
+      console.error('Error decodificando el token:', error);
+      return false; 
+    }
+  }
+  
+  // METODO PARA SABER SI ESTA LOGUEADO
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      console.log("Token no encontrado");
+      return false; 
+    }
+    try {
+      const tokendecodificado: any = jwtDecode(token);
+    if (tokendecodificado.exp && tokendecodificado.exp < Date.now() / 1000) {
+      this.logout();
+      return false;
+    }
+      return true;
+    }
+    catch (error) {
+      console.error('Error en el token:', error);
+      this.logout();
+      return false; 
+    }
+    
+  }
+
+  // METODO PARA SABER SI ES UN USUARIO REGULAR
+  isUser(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+  
+    try {
+      const decodedToken: any = jwtDecode(token);
+      // Asumiendo que role_id 2 es para usuarios regulares
+      return decodedToken?.rol_id === 2;
+    } catch (error) {
+      console.error('Error decodificando el token:', error);
+      return false;
+    }
   }
   
 }

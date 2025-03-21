@@ -17,6 +17,7 @@ export class LoginComponent {
   private ruta = inject(Router);
   private service = inject(AuthService)
 
+
   // CREACION DE FORMULARIO
   FormularioLogin = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -53,10 +54,13 @@ export class LoginComponent {
 
       this.service.login(credenciales).subscribe({
         next: (response) => {
-          localStorage.setItem('token',response.token);
+          localStorage.setItem('token',response.access_token);
           this.tostada.success('Login exitoso');
-          this.ruta.navigate(['/Graficas']);
-          this.FormularioLogin.reset();
+          if (this.service.isAdmin()) {
+            this.ruta.navigate(['/Admin-Dashboard']);
+          } else {
+            this.ruta.navigate(['/User-Dashboard']);
+          }
         },
         error: (error) => {
           console.error(error);
