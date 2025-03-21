@@ -17,19 +17,29 @@ export class EditarPerfilComponent {
   private editarPerfilService = inject(EditarPerfilService);
 
   FormularioEditarPerfil = new FormGroup({
-    name: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    lastname2: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    });
+    name: new FormControl('', [Validators.required, Validators.pattern(/^[\p{L}\s]+$/u)]),
+    lastname: new FormControl('', [Validators.required, Validators.pattern(/^[\p{L}\s]+$/u)]),
+    secondLastname: new FormControl('', [Validators.required, Validators.pattern(/^[\p{L}\s]+$/u)]),
+  });
 
   ngOnInit(): void {
     this.cargarInfoPerfil();
   }
 
   cargarInfoPerfil(){
-    let infoPerfil = this.editarPerfilService.getPerfil()
-    this.FormularioEditarPerfil.patchValue(infoPerfil)
+    this.editarPerfilService.getPerfil().subscribe({
+      next: (response) => {
+        console.log(response.name)
+        this.FormularioEditarPerfil.patchValue({
+          name: response.name,
+          lastname: response.lastname,
+          secondLastname: response.secondLastname
+        })
+      },
+      error: (error) => {
+        this.tostada.error("Error al cargar informacion del perfil", "Error")
+      }
+    })
   }
 
   private getErrorMessage(campo: string, nombreCampo: string): string | null {
@@ -48,6 +58,7 @@ export class EditarPerfilComponent {
     if (errors['min']) return `${nombreCampo}: Debe ser mayor a $${errors['min'].min}`;
     if (errors['max']) return `${nombreCampo}: No puede ser mayor a $${errors['max'].max}`;
     if (errors['email']) return `${nombreCampo}: tiene que ser un correo válido`;
+    if (errors['pattern']) return `${nombreCampo}: Solo se permiten letras y espacios`;
 
     return null;
   }
@@ -59,16 +70,24 @@ export class EditarPerfilComponent {
       const registerData: InfoPerfil = {
         name: formValues.name || '',
         lastname: formValues.lastname || '',
-        lastname2: formValues.lastname2 || '',
-        email: formValues.email || '',
+        secondLastname: formValues.secondLastname || ''
       };
 
+      this.editarPerfilService.updatePerfil(registerData).subscribe({
+        next: (response) => {
+          this.tostada.success("editar perfil exitoso")
+        },
+        error: (error) => {
+          console.log(error)
+          this.tostada.error("error al editar perfil", "Error")
+        }
+      })
 
       
     }
     else {
 
-      const campos: { [key: string]: string } = { name: 'Nombre', lastname: 'Apellido Paterno', lastname2: 'Apellido Materno', email: 'Email'};
+      const campos: { [key: string]: string } = { name: 'Nombre', lastname: 'Apellido Paterno', secondLastname: 'Apellido Materno'};
 
       Object.keys(campos).forEach((key) => {
         const errorMessage = this.getErrorMessage(key, campos[key]);

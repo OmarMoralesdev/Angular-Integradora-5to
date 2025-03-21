@@ -11,6 +11,8 @@ import { UserDashboardComponent } from './views/dashboard/user-dashboard/user-da
 import { AdminDashboardComponent } from './views/dashboard/admin-dashboard/admin-dashboard.component';
 import { SensoresHabitacionComponent } from './views/user/sensores/sensores-habitacion/sensores-habitacion.component';
 import{HabitacionesComponent} from './views/user/habitaciones/habitaciones.component';
+import { EditarContrasenaComponent } from './views/auth/editar-contrasena/editar-contrasena.component';
+import { EditarPerfilComponent } from './views/auth/editar-perfil/editar-perfil.component';
 
 export const routes: Routes = [
 
@@ -79,6 +81,14 @@ export const routes: Routes = [
         //RUTA PARA VER MIS HABITACIONES 
         path: 'misHabitaciones',
         component: HabitacionesComponent
+    },
+    {
+        path: 'editar-contraseña',
+        component: EditarContrasenaComponent
+    },
+    {
+        path: 'editar-perfil',
+        component: EditarPerfilComponent
     }
 
 
