@@ -6,21 +6,23 @@
           <h3 class="card-title">{{ sensor.name }}</h3>
         </div>
         <div class="card-body">
-          <ngx-charts-bar-vertical
-            [view]="[250, 150]"
-            [scheme]="'vivid'"
-            [results]="[{ name: sensor.name, value: sensor.value || 0 }]"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
-          </ngx-charts-bar-vertical>
+  
+          <ngx-charts-linear-gauge
+            [view]="[containerWidth, containerHeight]"
+            [scheme]="'cool'"
+            [value]="sensor.value || 0"
+
+            [previousValue]="previousValue"
+            (select)="onSelect($event)"
+            [units]="units"
+          >
+          </ngx-charts-linear-gauge>
+        </div>
+        <div class="text-center mt-4">
+          <button class="btn btn-primary" (click)="navigateToReport(sensor.id)">Ver Reporte</button>
         </div>
       </div>
     </div>
   </div>
+  
 </div>

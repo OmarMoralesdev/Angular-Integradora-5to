@@ -1,0 +1,6 @@
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ajusta según sea necesario */
+  }

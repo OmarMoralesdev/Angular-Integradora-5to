@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraficaService } from '../../core/services/webSockets/grafica.service';
 import { PusherService } from '../../core/services/webSockets/pusher.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,21 +13,16 @@ import { PusherService } from '../../core/services/webSockets/pusher.service';
 })
 export class GraficaComponent implements OnInit {
   sensors: any[] = [];
-  view: any[] = [700, 400];
+  containerWidth: number = 250; // Valor inicial
+  containerHeight: number = 150; // Valor inicial
+  value: number = 0;
 
-  // Opciones de la gráfica
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = false;
-  showXAxisLabel = true;
-  xAxisLabel = 'Tiempo';
-  showYAxisLabel = true;
-  yAxisLabel = 'Valor';
-  
-  colorScheme = { domain: ['#5AA454'] };
+  previousValue: number = 70;
+  units: string = 'counts';
 
-  constructor(private graficaService: GraficaService, private pusherService: PusherService) {}
+  constructor(private graficaService: GraficaService, private pusherService: PusherService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.fetchSensors();
@@ -34,6 +30,17 @@ export class GraficaComponent implements OnInit {
       console.log(data);
       this.updateChartData(data);
     });
+
+    this.updateContainerSize();
+    window.addEventListener('resize', () => this.updateContainerSize());
+  }
+
+  updateContainerSize(): void {
+    const container = document.querySelector('.card-body');
+    if (container) {
+      this.containerWidth = container.clientWidth;
+      this.containerHeight = container.clientHeight;
+    }
   }
 
   fetchSensors(): void {
@@ -56,5 +63,13 @@ export class GraficaComponent implements OnInit {
     } else {
       this.sensors.push({ id: data.sensorId, name: data.sensorName, value: data.data });
     }
+  }
+
+  onSelect(event: any): void {
+    console.log(event);
+  }
+
+  navigateToReport(sensorId: string): void {
+    this.router.navigate(['/reporte-diario', sensorId]);
   }
 }
