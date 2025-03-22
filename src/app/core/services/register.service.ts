@@ -13,8 +13,8 @@ export class RegisterService {
 
 
   // constructor(private http: HttpClient) { }
-  register(registerdata: Register): Observable<any> {
-    return this.http.post<any>(this.apiUrl, registerdata);
+  register(registerdata: Register): Observable<Register> {
+    return this.http.post<Register>(this.apiUrl, registerdata);
   }
    
 }

@@ -1,6 +1,13 @@
 
-<app-guest-navbar></app-guest-navbar>
-<!--CONTENEDOR DE TODAS LAS RUTAS-->
+<app-guest-navbar *ngIf="!authService.isLoggedIn()"></app-guest-navbar>
+
+<app-user-navbar *ngIf="authService.isLoggedIn() && authService.isUser()"></app-user-navbar>
+
+<app-admin-navbar *ngIf="authService.isLoggedIn() && authService.isAdmin()" ></app-admin-navbar>
+
+
+ <!---CONTENEDOR DE TODAS LAS RUTAS---> 
+
 <router-outlet></router-outlet>
 
 <app-footer-guest></app-footer-guest>

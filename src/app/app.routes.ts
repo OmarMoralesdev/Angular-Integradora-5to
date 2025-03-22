@@ -7,6 +7,12 @@ import { SobreNosotrosComponent } from './views/welcome/sobre-nosotros/sobre-nos
 import { ParaQuienComponent } from './views/welcome/para-quien/para-quien.component';
 import { GraficaComponent } from './views/grafica/grafica.component';
 import { EnviarCorreoComponent } from './views/auth/enviar-correo/enviar-correo/enviar-correo.component';
+import { UserDashboardComponent } from './views/dashboard/user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './views/dashboard/admin-dashboard/admin-dashboard.component';
+import { SensoresHabitacionComponent } from './views/user/sensores/sensores-habitacion/sensores-habitacion.component';
+import{HabitacionesComponent} from './views/user/habitaciones/habitaciones.component';
+import { EditarContrasenaComponent } from './views/auth/editar-contrasena/editar-contrasena.component';
+import { EditarPerfilComponent } from './views/auth/editar-perfil/editar-perfil.component';
 import { ReporteDiarioComponent } from './views/user/reporte/reporte-diario/reporte-diario.component';
 
 export const routes: Routes = [
@@ -61,7 +67,34 @@ export const routes: Routes = [
     },
     { 
         path: 'reporte-diario/:id', component: ReporteDiarioComponent 
+    },
+    {
+        path: 'User-Dashboard',
+        component: UserDashboardComponent
+    },
+    {
+        path: 'Admin-Dashboard',
+        component: AdminDashboardComponent
+    },
+    {
+        //RUTA PARA VER QUE SENSORES TIENE LA HABITACION // ACTIVAR O DESACTIVARLOS 
+        path: 'sensorHabitacion',
+        component: SensoresHabitacionComponent
+    },
+    {
+        //RUTA PARA VER MIS HABITACIONES 
+        path: 'misHabitaciones',
+        component: HabitacionesComponent
+    },
+    {
+        path: 'editar-contraseña',
+        component: EditarContrasenaComponent
+    },
+    {
+        path: 'editar-perfil',
+        component: EditarPerfilComponent
     }
+
 
 
 ];

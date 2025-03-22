@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Register } from '../../../core/models/register';
 import { RegisterService } from '../../../core/services/register.service';
+import { min } from 'rxjs';
 
 
 @Component({
@@ -14,12 +15,14 @@ import { RegisterService } from '../../../core/services/register.service';
 })
 export class RegisterComponent {
   // MI SERVICIO TOSTADA
-  private tostada = inject(ToastrService);
-  private registerService = inject(RegisterService);
-  private router = inject(Router);
-
-  // CREACION DE FORMULARIO
-  FormularioRegister = new FormGroup({
+  
+  FormularioRegister: FormGroup;
+  constructor(public registerService:RegisterService,
+    private tostada: ToastrService,
+    public router: Router
+  ) { 
+     // CREACION DE FORMULARIO
+  this.FormularioRegister = new FormGroup({
     name: new FormControl('', [Validators.required,
       Validators.pattern('^[a-zA-Z ]*$'),
        Validators.minLength(3),
@@ -29,12 +32,44 @@ export class RegisterComponent {
        Validators.minLength(3),
         Validators.maxLength(50)]
     ),
-    secondLastname: new FormControl('', ),
-    birthdate: new FormControl('', Validators.required),
+    secondLastname: new FormControl('', [Validators.pattern('^[a-zA-Z ]*$'),
+       Validators.minLength(3),
+        Validators.maxLength(50)]
+    ),
+    birthdate: new FormControl('', [Validators.required, this.validateAge.bind(this)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(50)]
+    ),
     // confirmpassword: new FormControl('', Validators.required),
   });
+
+  }
+
+ 
+
+  // METODO PARA VALIDAR LA EDAD
+  private validateAge(control: AbstractControl) {
+    const birthdate = new Date(control.value);
+    const today = new Date();
+    let age = today.getFullYear() - birthdate.getFullYear();
+    
+    // Ajustar la edad si aún no ha llegado el cumpleaños este año
+    const monthDiff = today.getMonth() - birthdate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+      age--;
+    }
+
+    if (age < 13) {
+      return { minAge: { min: 13, actual: age } };
+    }
+    if (age > 100) {
+      return { maxAge: { max: 100, actual: age } };
+    }
+
+    return null;
+  }
 
   private getErrorMessage(campo: string, nombreCampo: string): string | null {
     // OBTENEMOS EL CONTROL DEL CAMPO
@@ -49,28 +84,37 @@ export class RegisterComponent {
     if (errors['minlength']) return `${nombreCampo}: Debe tener al menos ${errors['minlength'].requiredLength} caracteres`;
     if (errors['maxlength']) return `${nombreCampo}: No puede tener más de ${errors['maxlength'].requiredLength} caracteres`;
     if (errors['pattern']) return `${nombreCampo}: Solo se permiten letras y espacios`;
-    if (errors['min']) return `${nombreCampo}: Debe ser mayor a $${errors['min'].min}`;
-    if (errors['max']) return `${nombreCampo}: No puede ser mayor a $${errors['max'].max}`;
     if (errors['email']) return `${nombreCampo}: tiene que ser un correo válido`;
+    if (errors['minAge']) return `${nombreCampo}: Debes tener al menos 13 años`;
+    if (errors['maxAge']) return `${nombreCampo}: La edad no puede ser mayor a 100 años`;
 
     return null;
   }
 
   onRegister() {
-      const formValues = this.FormularioRegister.value;
-      const registerData: Register = {
-        name: formValues.name || '',
-        lastname: formValues.lastname || '',
-        secondLastname: formValues.secondLastname || '',
-        birthdate: formValues.birthdate || '',
-        email: formValues.email || '',
-        password: formValues.password || '',
-      };
+      if (this.FormularioRegister.invalid) {
+        const campos: { [key: string]: string } = {
+          name: 'Nombre',
+          lastname: 'Apellido paterno',
+          secondLastname: 'Apellido materno',
+          birthdate: 'Fecha de nacimiento',
+          email: 'Correo electrónico',
+          password: 'Contraseña',
+          };
+        
+          Object.keys(campos).forEach((key) => {
+            const errorMessage = this.getErrorMessage(key, campos[key]);
+            if (errorMessage) {
+              this.tostada.error(errorMessage, 'Error de validación');
+            }
+          });
+        return;
+      }
       
-      this.registerService.register(registerData).subscribe({
+      this.registerService.register(this.FormularioRegister.value).subscribe({
         next: (response) => {
           console.log('Server response:', response);
-          this.tostada.success('Registro exitoso');
+          this.tostada.success('Registro exitoso, favor de checar su correo');
           this.router.navigate(['/Login']);
           this.FormularioRegister.reset();
         },
@@ -86,15 +130,5 @@ export class RegisterComponent {
       });
 
     }
-  //   else {
-  //     const campos: { [key: string]: string } = { name: 'Nombre', lastname: 'Apellido Paterno', lastname2: 'Apellido Materno', email: 'Email', password: 'Contraseña', confirmpassword: 'Confirmar Contraseña' };
-
-  //     Object.keys(campos).forEach((key) => {
-  //       const errorMessage = this.getErrorMessage(key, campos[key]);
-  //       if (errorMessage) {
-  //         this.tostada.error(errorMessage, 'Error de validación');
-  //       }
-  //     });
-  //   }
-  // }
+ 
 }

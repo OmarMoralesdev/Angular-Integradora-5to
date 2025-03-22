@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { InfoPerfil } from '../../../core/models/info-perfil';
+import { EditarPerfilService } from '../../../core/services/editar-perfil.service';
 
 @Component({
   selector: 'app-editar-contrasena',
@@ -10,9 +12,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class EditarContrasenaComponent {
   private tostada = inject(ToastrService);
+  private editarPerfilService = inject(EditarPerfilService);
 
   FormularioEditarContrasena = new FormGroup({
     password: new FormControl('', Validators.required),
+    newpassword: new FormControl('', Validators.required),
     confirmpassword: new FormControl('', Validators.required),
   });
 
@@ -38,19 +42,34 @@ export class EditarContrasenaComponent {
 
   onEdit() {
       if (this.FormularioEditarContrasena.valid) {
-        // const formValues = this.FormularioEditarContrasena.value;
+
+        const formValues = this.FormularioEditarContrasena.value;
   
-        // const registerData: InfoPerfil = {
-        //   name: formValues.password || '',
-        //   lastname: formValues.confirmpassword || '',
-        // };
-  
+        const registerData: any = {
+          password: formValues.password || '',
+          newpassword: formValues.newpassword || '',
+          confirmpassword: formValues.confirmpassword || '',
+        };
+        
+        if (registerData.newpassword == registerData.confirmpassword){
+          this.editarPerfilService.updatePassword(registerData).subscribe({
+            next: (response) => {
+              this.tostada.success("cambiar contraseña exitoso")
+            },
+            error: (error) => {
+              this.tostada.error("La contraseña actual no es correcta", "Error")
+            }
+          })
+        }
+        else {
+          this.tostada.error('Confirmar password: tiene que ser igual a la nueva contraseña')
+        }
   
         
       }
       else {
   
-        const campos: { [key: string]: string } = { password: 'Contraseña', confirmpassword: 'Confirmar Contraseña'};
+        const campos: { [key: string]: string } = { password: 'Password', newpassword: 'Password nuevo', confirmpassword: 'Confirmar password'};
   
         Object.keys(campos).forEach((key) => {
           const errorMessage = this.getErrorMessage(key, campos[key]);

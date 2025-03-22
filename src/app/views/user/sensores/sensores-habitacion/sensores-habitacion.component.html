@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <label for="">Habitaciones</label>
+            <select [(ngModel)]="habitacion.id" class="form-control">
+                <option [value]="-1" disabled>Selecciona una habitación</option>
+                <option *ngFor="let habi of habitaciones" [value]="habi.id">{{habi.name}}</option>
+            </select>
+
+        </div>
+    </div>
+</div>
