@@ -1,6 +1,80 @@
+/* Fondo general */
+.fondo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
+  height: 100%;
+}
+
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%; /* Asegura que las tarjetas ocupen todo el espacio disponible */
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos internos se alineen verticalmente */
+  justify-content: space-between; /* Espaciado uniforme entre los elementos */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .card-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Ajusta según sea necesario */
-  }
+  flex-grow: 1; /* Permite que el cuerpo de la tarjeta ocupe el espacio restante */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente el contenido */
+  align-items: center; /* Centra horizontalmente el contenido */
+}
+
+.card {
+  min-height: 100%; /* Ajusta este valor según tus necesidades */
+  
+}
+.row > .col-md-4 {
+  margin-bottom: 20px; /* Espaciado vertical entre filas */
+}
+
+.card-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* hover card */
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.5s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* Mensajes */
+.message p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Valores */
+.data h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Botón */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-primary:disabled {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  cursor: not-allowed;
+}
