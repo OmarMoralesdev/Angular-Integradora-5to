@@ -63,7 +63,7 @@ export const routes: Routes = [
     },
     {
         //RUTA PARA LA GRAFICA DE LOS SENSORES
-        path: 'Graficas',
+        path: 'Graficas/:id',
         component: GraficaComponent
     },
     { 

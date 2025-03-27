@@ -1,28 +1,47 @@
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-md-4" *ngFor="let sensor of sensors">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-          <h3 class="card-title">{{ sensor.name }}</h3>
-        </div>
-        <div class="card-body">
-  
-          <ngx-charts-linear-gauge
-            [view]="[containerWidth, containerHeight]"
-            [scheme]="'cool'"
-            [value]="sensor.value || 0"
+<div class="fondo">
+  <div class="container ">
+    <div class="row">
+      <br>
+      <div class="col-md-4" *ngFor="let sensor of sensors">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header text-center bg-primary text-white">
+            <h3 class="card-title">{{ sensor.nombre || 'Sensor Desconocido' }}</h3>
+          </div>
+          <div class="card-body text-center">
 
-            [previousValue]="previousValue"
-            (select)="onSelect($event)"
-            [units]="units"
-          >
-          </ngx-charts-linear-gauge>
-        </div>
-        <div class="text-center mt-4">
-          <button class="btn btn-primary" (click)="navigateToReport(sensor.id)">Ver Reporte</button>
+            <!-- Mostrar mensaje -->
+            <div class="message mb-3">
+              <p class="text-muted" *ngIf="sensor.msg; else noMessage">
+                {{ sensor.msg }}
+              </p>
+              <ng-template #noMessage>
+                <p class="text-muted">Sin mensaje disponible</p>
+              </ng-template>
+            </div>
+
+            <!-- Mostrar valor -->
+            <div class="data">
+              <h4 *ngIf="sensor.value !== null; else noValue" class="text-success">
+                {{ sensor.value }} <span *ngIf="sensor.value === null"> {{ sensor.unidad }}</span>
+              </h4>
+              <ng-template #noValue>
+                <h4 class="text-danger">Sin datos</h4>
+              </ng-template>
+            </div>
+
+          </div>
+          <div class="text-center mt-4">
+            <button
+              class="btn btn-primary"
+              (click)="navigateToReport(sensor.id)"
+              [disabled]="!sensor.id"
+            >
+              Ver Reporte
+            </button>
+          </div>
+       <br>
         </div>
       </div>
     </div>
   </div>
-  
 </div>
