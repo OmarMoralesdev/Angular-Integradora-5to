@@ -1,65 +1,94 @@
-.fondo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
-    height: 100vh; /* Usa la altura de la ventana */
-    margin-top: 70px; 
+
+
+.btn {
+    background-color: #3F51B5;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
+
+.btnhamburgesa{
+    background-color: #222532;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+ .btn:hover {
+    background-color: #283593;
+}
+
 
 .card {
-    width: 100%;
-    max-width: 18rem; 
+    width: 300px;
+    border: none;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 4px 10px #3F4A8A;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-.espacio{
-    margin-bottom: 20px;
-}
-
-.card i{
-    color: #3F4A8A;
-    font-size: 4rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #f9f9f9;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card i {
+    color: #3F51B5;
+}
+
+.card-icon {
+    font-size: 4rem;
+    color: #3F51B5;
+    margin-top: 20px;
 }
 
 .card-body {
     padding: 20px;
+    text-align: center;
 }
 
 .card-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
+    color: #333;
     margin-bottom: 10px;
 }
 
-.btn-primary {
-    background-color: #3F4A8A;
-    border: none;
-    padding: 8px 16px;
+.dropdown {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.dropdown-menu {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
 
-.btn-primary:hover {
-    background-color: #8d92ad;
+.dropdown-item {
+    font-size: 1rem;
+    color: #333;
+    transition: background-color 0.2s ease;
 }
-.nuevahabitacio{
-    background-color: #000000;
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
 }
-.btn{
-    background-color: #3F4A8A;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    color: aliceblue;
-    
+
+.dropdown-item.text-danger {
+    color: #e53935;
 }
-.btn:hover {
-    background-color: #8d92ad;
+
+.dropdown-item.text-danger:hover {
+    background-color: #ffebee;
 }
