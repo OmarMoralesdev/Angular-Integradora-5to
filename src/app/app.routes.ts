@@ -14,6 +14,7 @@ import{HabitacionesComponent} from './views/user/habitaciones/habitaciones.compo
 import { EditarContrasenaComponent } from './views/auth/editar-contrasena/editar-contrasena.component';
 import { EditarPerfilComponent } from './views/auth/editar-perfil/editar-perfil.component';
 import { ReporteDiarioComponent } from './views/user/reporte/reporte-diario/reporte-diario.component';
+import { AltaHabitacionComponent } from './views/user/alta-habitacion/alta-habitacion.component';
 
 export const routes: Routes = [
 
@@ -85,6 +86,11 @@ export const routes: Routes = [
         //RUTA PARA VER MIS HABITACIONES 
         path: 'misHabitaciones',
         component: HabitacionesComponent
+    },
+    {
+        //RUTA PARA DAR DE ALTA HABITACION
+        path: 'nuevaHabitacion',
+        component: AltaHabitacionComponent
     },
     {
         path: 'editar-contraseña',

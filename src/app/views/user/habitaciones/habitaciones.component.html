@@ -1,14 +1,19 @@
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let habitacion of habitaciones">
-            <div class="card text-center" style="width: 18rem;">
-                <i class="bi bi-house-door-fill fs-1 text-primary mt-3"></i> <!-- Ícono -->
-                <div class="card-body">
-                    <h5 class="card-title">Habitación</h5>
-                    <p class="card-text">{{ habitacion.name }}</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
-                </div>
+<div class="fondo">
+        <div class="row">
+            <div class="nuevahabitacion">
+                <button routerLink="/nuevaHabitacion" class="btn">REGISTRAR NUEVA HABITACION </button>
             </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-5 " *ngFor="let habitacion of habitaciones">
+                    <div class="card text-center">
+                        <button (click)="EliminarHabitacion(habitacion.id)" >eliminar</button>
+                        <i class="bi bi-house-door-fill  mt-3"></i> 
+                        <div class="card-body">
+                            <h5 class="card-title">{{habitacion.name}}</h5>
+                            <a  routerLink="/sensorHabitacion"  class="btn btn-primary me-2">Sensores</a>
+                            <a routerLink="/Graficas" class="btn btn-primary">Estadisticas</a>
+                        </div>
+                    </div>
+                </div>
         </div>
-    </div>
 </div>
+

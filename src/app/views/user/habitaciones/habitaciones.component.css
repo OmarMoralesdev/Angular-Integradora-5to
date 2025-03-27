@@ -1,0 +1,65 @@
+.fondo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
+    height: 100vh; /* Usa la altura de la ventana */
+    margin-top: 70px; 
+}
+
+.card {
+    width: 100%;
+    max-width: 18rem; 
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px #3F4A8A;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.espacio{
+    margin-bottom: 20px;
+}
+
+.card i{
+    color: #3F4A8A;
+    font-size: 4rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #3F4A8A;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #8d92ad;
+}
+.nuevahabitacio{
+    background-color: #000000;
+}
+.btn{
+    background-color: #3F4A8A;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    color: aliceblue;
+    
+}
+.btn:hover {
+    background-color: #8d92ad;
+}
