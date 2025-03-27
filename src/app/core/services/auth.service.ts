@@ -39,19 +39,13 @@ private router = inject(Router);
   isAdmin(): boolean {
     const token = localStorage.getItem('token');
     if (!token) {
-      console.log("Token no encontrado");
       return false; 
     }
   
     try {
-     
       const decodedToken: any = jwtDecode(token);
-  
-      console.log("Token decodificado:", decodedToken); 
-  
       return decodedToken?.rol_id === 1;
     } catch (error) {
-      console.error('Error decodificando el token:', error);
       return false; 
     }
   }
@@ -61,7 +55,6 @@ private router = inject(Router);
     const token = localStorage.getItem('token');
     
     if (!token) {
-      console.log("Token no encontrado");
       return false; 
     }
     try {
@@ -73,7 +66,6 @@ private router = inject(Router);
       return true;
     }
     catch (error) {
-      console.error('Error en el token:', error);
       this.logout();
       return false; 
     }
@@ -92,7 +84,6 @@ private router = inject(Router);
       // Asumiendo que role_id 2 es para usuarios regulares
       return decodedToken?.rol_id === 2;
     } catch (error) {
-      console.error('Error decodificando el token:', error);
       return false;
     }
   }
