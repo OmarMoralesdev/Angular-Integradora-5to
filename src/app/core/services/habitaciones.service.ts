@@ -24,4 +24,7 @@ export class HabitacionesService {
   deleteHabitacion(id: number): Observable<Habitacion> {
     return this.http.delete<Habitacion>(`${this.url}/${id}`);
 }
+putHabitacion(id: number, Habitacion: Habitacion): Observable<Habitacion> {
+  return this.http.put<Habitacion>(`${this.url}/${id}`, Habitacion);
+}
 }
