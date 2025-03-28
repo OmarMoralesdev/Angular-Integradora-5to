@@ -1,19 +1,55 @@
 <div class="fondo">
-        <div class="row">
-            <div class="nuevahabitacion">
-                <button routerLink="/nuevaHabitacion" class="btn">REGISTRAR NUEVA HABITACION </button>
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="titulo-habitaciones">Habitaciones</h1>
+        <button routerLink="/nuevaHabitacion" class="btn">
+          REGISTRAR NUEVA HABITACIÓN
+        </button>
+      </div>
+  
+  
+        <div class="col-md-4" *ngFor="let habitacion of habitaciones">
+          <div class="card text-center">
+            <div class="dropdown text-end">
+              <button
+                class="btnhamburgesa btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton{{ habitacion.id }}"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                title="Options"
+              >
+                <i class="bi bi-three-dots"></i>
+              </button>
+              <ul
+                class="dropdown-menu"
+                [attr.aria-labelledby]="'dropdownMenuButton' + habitacion.id"
+              >
+                <li>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['/editarHabitacion', habitacion.id]"
+                  >
+                    <i class="bi bi-pencil"></i> Editar
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item text-danger"
+                    (click)="EliminarHabitacion(habitacion.id!)"
+                  >
+                    <i class="bi bi-trash"></i> Eliminar
+                  </a>
+                </li>
+              </ul>
             </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-5 " *ngFor="let habitacion of habitaciones">
-                    <div class="card text-center">
-                        <button (click)="EliminarHabitacion(habitacion.id)" >eliminar</button>
-                        <i class="bi bi-house-door-fill  mt-3"></i> 
-                        <div class="card-body">
-                            <h5 class="card-title">{{habitacion.name}}</h5>
-                            <a  routerLink="/sensorHabitacion"  class="btn btn-primary me-2">Sensores</a>
-                            <a routerLink="/Graficas" class="btn btn-primary">Estadisticas</a>
-                        </div>
-                    </div>
-                </div>
+  
+            <i class="bi bi-house-door-fill mt-3 card-icon"></i>
+            <div class="card-body">
+              <h5 class="card-title">{{ habitacion.name }}</h5>
+            </div>
+          </div>
         </div>
-</div>
+      </div>
 
+  </div>
