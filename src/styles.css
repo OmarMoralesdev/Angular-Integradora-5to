@@ -13,3 +13,11 @@
     margin: 0;
    padding: 0;
   }
+
+  .fondo {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
+    height: 100%;
+  }
+  
