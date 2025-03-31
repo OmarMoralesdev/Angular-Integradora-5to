@@ -8,7 +8,7 @@ import { Habitacion } from '../models/habitacion';
 })
 export class HabitacionesService {
 
-  private url = 'http://127.0.0.1:8000/api/v1/habitacion'
+  private url = 'http://192.168.252.217:8000/api/v1/habitacion'
 
   constructor(private http:HttpClient) { }
 

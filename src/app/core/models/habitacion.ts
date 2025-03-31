@@ -1,5 +1,5 @@
 export interface Habitacion {
-    id?: number;
+    id: number;
     name: string;
     usuario_id: number; 
 }
