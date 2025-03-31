@@ -29,7 +29,7 @@ export class EditarPerfilComponent {
   cargarInfoPerfil(){
     this.editarPerfilService.getPerfil().subscribe({
       next: (response) => {
-        console.log(response.name)
+        console.log(response)
         this.FormularioEditarPerfil.patchValue({
           name: response.name,
           lastname: response.lastname,

@@ -10,11 +10,17 @@ import { environment } from '../../../environments/environment';
 export class HabitacionesService {
 
   private url = environment.apiUrl+'/habitacion'
+  private una= environment.apiUrl+'/habitacionespor'
 
   constructor(private http:HttpClient) { }
 
   getHabitacion(): Observable<{data: Habitacion[]}> {
     return this.http.get<{data: Habitacion[]}>(this.url);
+  }
+  
+  getHabitacionId(id:number):Observable<Habitacion>{
+    const url = `${this.una}/${id}`;
+    return this.http.get<Habitacion>(url);
   }
 
   postHabitacion(Habitacion: Habitacion):Observable<{msg:string; data:Habitacion}>{

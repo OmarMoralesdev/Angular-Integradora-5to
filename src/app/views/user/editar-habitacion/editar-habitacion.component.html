@@ -1,12 +1,12 @@
 <div class="fondo">
     <div class="fondoFormulario">
       <i class="bi bi-house-door-fill iconoCasa"></i> 
-      <form [formGroup]="FormHabitacion" (ngSubmit)="postHabitacion()">
+      <form [formGroup]="EditForm" (ngSubmit)="actualizarHabi()">
         <h1>Edita tu habitación 😊✏</h1>
         <div class="input-box">
           <input id="name" placeholder="Nombre de la Habitación" type="text" formControlName="name" />
         </div>
-        <button class="btn" type="submit">Crear Habitación</button>
+        <button class="btn" type="submit">Editar Habitación</button>
       </form>
     </div>
   </div>
