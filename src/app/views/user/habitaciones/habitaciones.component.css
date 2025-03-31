@@ -12,7 +12,7 @@
 }
 
 .btnhamburgesa{
-    background-color: #222532;
+    background-color: #ffffff;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -44,6 +44,12 @@
 
 .card i {
     color: #3F51B5;
+    
+}
+.tres-puntos {
+    color: #3F51B5;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 .card-icon {

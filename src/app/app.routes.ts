@@ -16,6 +16,7 @@ import { EditarPerfilComponent } from './views/auth/editar-perfil/editar-perfil.
 import { ReporteDiarioComponent } from './views/user/reporte/reporte-diario/reporte-diario.component';
 import { AltaHabitacionComponent } from './views/user/alta-habitacion/alta-habitacion.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found/not-found.component';
+import { authTokenGuard } from './core/guards/auth-token.guard';
 
 export const routes: Routes = [
 
@@ -45,7 +46,7 @@ export const routes: Routes = [
     },
     {
         path: 'enviar-correo',
-        component: EnviarCorreoComponent
+        component: EnviarCorreoComponent ,canActivate: [authTokenGuard]
     },
     {
         // RUTA PARA LOS SENSORES QUE OFRECEMOS
@@ -65,41 +66,41 @@ export const routes: Routes = [
     {
         //RUTA PARA LA GRAFICA DE LOS SENSORES
         path: 'Graficas/:id',
-        component: GraficaComponent
+        component: GraficaComponent, canActivate: [authTokenGuard]
     },
     { 
-        path: 'reporte-diario/:id', component: ReporteDiarioComponent 
+        path: 'reporte-diario/:id', component: ReporteDiarioComponent  ,canActivate: [authTokenGuard]
     },
     {
         path: 'User-Dashboard',
-        component: UserDashboardComponent
+        component: UserDashboardComponent  ,canActivate: [authTokenGuard]
     },
     {
         path: 'Admin-Dashboard',
-        component: AdminDashboardComponent
+        component: AdminDashboardComponent  ,canActivate: [authTokenGuard]
     },
     {
         //RUTA PARA VER QUE SENSORES TIENE LA HABITACION // ACTIVAR O DESACTIVARLOS 
-        path: 'sensorHabitacion',
-        component: SensoresHabitacionComponent
+        path: 'sensorHabitacion/:id',
+        component: SensoresHabitacionComponent  ,canActivate: [authTokenGuard]
     },
     {
         //RUTA PARA VER MIS HABITACIONES 
         path: 'misHabitaciones',
-        component: HabitacionesComponent
+        component: HabitacionesComponent  ,canActivate: [authTokenGuard]
     },
     {
         //RUTA PARA DAR DE ALTA HABITACION
         path: 'nuevaHabitacion',
-        component: AltaHabitacionComponent
+        component: AltaHabitacionComponent  ,canActivate: [authTokenGuard]
     },
     {
         path: 'editar-contraseña',
-        component: EditarContrasenaComponent
+        component: EditarContrasenaComponent  ,canActivate: [authTokenGuard]
     },
     {
         path: 'editar-perfil',
-        component: EditarPerfilComponent
+        component: EditarPerfilComponent ,canActivate: [authTokenGuard]
     },
     {
         path: '**', component:NotFoundComponent
