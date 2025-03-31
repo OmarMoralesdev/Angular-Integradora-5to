@@ -15,6 +15,7 @@ import { EditarContrasenaComponent } from './views/auth/editar-contrasena/editar
 import { EditarPerfilComponent } from './views/auth/editar-perfil/editar-perfil.component';
 import { ReporteDiarioComponent } from './views/user/reporte/reporte-diario/reporte-diario.component';
 import { AltaHabitacionComponent } from './views/user/alta-habitacion/alta-habitacion.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found/not-found.component';
 
 export const routes: Routes = [
 
@@ -99,7 +100,11 @@ export const routes: Routes = [
     {
         path: 'editar-perfil',
         component: EditarPerfilComponent
+    },
+    {
+        path: '**', component:NotFoundComponent
     }
+
 
 
 
