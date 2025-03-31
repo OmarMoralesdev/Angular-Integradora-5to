@@ -40,19 +40,15 @@ export class HabitacionesComponent implements OnInit {
       this.tostada.error('ID de la habitación no válido.', 'Error');
       return;
     }
-    const toast = this.tostada.info(
-      '¿Estás seguro de que quieres eliminar esta categoría?',
-      'Confirmar eliminación',
-      {
-        closeButton: true,
-        timeOut: 0,
-        extendedTimeOut: 0,
-        disableTimeOut: true,
-        positionClass: 'toast-bottom-center',
-        tapToDismiss: false,
-      }
-    );
-
+    const toast = this.tostada.info('¿Estás seguro de que quieres eliminar esta categoría?', 'Confirmar eliminación', {
+      closeButton: true,
+      timeOut: 0, 
+      extendedTimeOut: 0,
+      disableTimeOut: true,
+      positionClass: 'toast-bottom-center',
+      tapToDismiss: false
+    });
+  
     toast.onTap.subscribe(() => {
       this.habitacionservice.deleteHabitacion(id).subscribe({
         next: () => {
