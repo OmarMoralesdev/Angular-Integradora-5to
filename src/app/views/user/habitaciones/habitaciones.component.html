@@ -1,55 +1,61 @@
 <div class="fondo">
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="titulo-habitaciones">Habitaciones</h1>
-        <button routerLink="/nuevaHabitacion" class="btn">
-          REGISTRAR NUEVA HABITACIÓN
-        </button>
-      </div>
-  
-  
-        <div class="col-md-4" *ngFor="let habitacion of habitaciones">
-          <div class="card text-center">
-            <div class="dropdown text-end">
-              <button
-                class="btnhamburgesa btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton{{ habitacion.id }}"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                title="Options"
-              >
-                <i class="bi bi-three-dots"></i>
-              </button>
-              <ul
-                class="dropdown-menu"
-                [attr.aria-labelledby]="'dropdownMenuButton' + habitacion.id"
-              >
-                <li>
-                  <a
-                    class="dropdown-item"
-                    [routerLink]="['/editarHabitacion', habitacion.id]"
-                  >
-                    <i class="bi bi-pencil"></i> Editar
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item text-danger"
-                    (click)="EliminarHabitacion(habitacion.id!)"
-                  >
-                    <i class="bi bi-trash"></i> Eliminar
-                  </a>
-                </li>
-              </ul>
-            </div>
-  
-            <i class="bi bi-house-door-fill mt-3 card-icon"></i>
-            <div class="card-body">
-              <h5 class="card-title">{{ habitacion.name }}</h5>
-            </div>
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="titulo-habitaciones">Habitaciones</h1>
+      <button routerLink="/nuevaHabitacion" class="btn">
+        REGISTRAR NUEVA HABITACIÓN
+      </button>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let habitacion of habitaciones">
+        <div class="card text-center">
+          <div class="dropdown text-end">
+            <button
+              class="btnhamburgesa btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton{{ habitacion.id }}"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              title="Options"
+            >
+              <i class="bi bi-three-dots mt-3 tres-puntos"></i>
+            </button>
+            <ul
+              class="dropdown-menu"
+              [attr.aria-labelledby]="'dropdownMenuButton' + habitacion.id"
+            >
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/sensorHabitacion', habitacion.id]"
+                >
+                  <i class="bi bi-pencil"></i> Editar
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item text-danger"
+                  (click)="EliminarHabitacion(habitacion.id!)"
+                >
+                  <i class="bi bi-trash"></i> Eliminar
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <i class="bi bi-house-door-fill mt-3 card-icon"></i>
+          <div class="card-body">
+            <h5 class="card-title">{{ habitacion.name }}</h5>
+            <a
+              class="btn btn-primary"
+              [routerLink]="['/Graficas', habitacion.id]"
+            >
+              Ver datos
+            </a>
           </div>
         </div>
       </div>
-
+    </div>
   </div>
+</div>

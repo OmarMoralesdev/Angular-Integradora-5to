@@ -1,12 +1,22 @@
 <div class="container">
-    <div class="row">
-        <div class="col-6">
-            <label for="">Habitaciones</label>
-            <select [(ngModel)]="habitacion.id" class="form-control">
+    <div class="row mt-4">
+        <div class="col-6 mb-5">
+            <h4 class="mb-1" for="">Habitaciones</h4>
+            <select [(ngModel)]="habitacion.id" class="form-control mb-5 " (change)="onHabitacionSeleccionada()">
                 <option [value]="-1" disabled>Selecciona una habitación</option>
                 <option *ngFor="let habi of habitaciones" [value]="habi.id">{{habi.name}}</option>
             </select>
 
+            <h4 for="">Sensores</h4>
+            <div class="container">
+                <div class="col-md-3 mb-4" *ngFor="let sensor of sensores">
+                    <div>
+                        <input class="form-check-input" type="checkbox" [value]="sensor.id" [(ngModel)]="sensor.checked" (ngModelChange)="estado(sensor)" >
+                        <label>  {{ sensor.nombre }}</label>
+                      </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>

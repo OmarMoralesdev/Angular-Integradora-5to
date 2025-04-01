@@ -23,6 +23,10 @@ export class HabitacionesService {
     return this.http.get<Habitacion>(url);
   }
 
+  getHabitacionPorId(id: number): Observable<{msg:string; data: Habitacion}> {
+    return this.http.get<{msg:string; data: Habitacion}>(`${this.url}/${id}`);
+  }
+
   postHabitacion(Habitacion: Habitacion):Observable<{msg:string; data:Habitacion}>{
     return this.http.post<{msg: string; data:Habitacion}>(this.url,Habitacion);
   }

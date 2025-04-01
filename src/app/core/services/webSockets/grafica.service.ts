@@ -22,15 +22,15 @@ export class GraficaService {
   }
 
   fetchSensorsByRoom(roomId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}habitaciones/sensores/${roomId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/habitaciones/sensores/${roomId}`);
   }
 
   habiticionById(roomId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}habitacionespor/${roomId}`);
+    return this.http.get<any>(`${this.apiUrl}/habitacionespor/${roomId}`);
   }
 
   fetchEstadisticas(sensorId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}estadisticas/${sensorId}`);
+    return this.http.get<any>(`${this.apiUrl}/estadisticas/${sensorId}`);
   }
 
   fetchSensorById(sensorId: number): Observable<any> {
