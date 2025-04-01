@@ -31,21 +31,11 @@ export class GraficaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id && !isNaN(+id)) {
+      this.fetchSensors(+id);
       this.subscriptions.add(
-        this.graficaService.habiticionById(+id).subscribe(
-          (sensor) => {
-            this.fetchSensors(+id);
-            this.subscriptions.add(
-              this.pusherService.getSensorUpdates().subscribe((data) => {
-                this.updateChartData(data);
-              })
-            );
-          },
-          (error) => {
-            this.toastr.error('Error al obtener la habitación', 'Error');
-            console.error('Error al obtener la habitación:', error);
-          }
-        )
+        this.pusherService.getSensorUpdates().subscribe((data) => {
+          this.updateChartData(data);
+        })
       );
     } else {
       this.toastr.error('ID no válido', 'Error');
@@ -56,8 +46,6 @@ export class GraficaComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-
-
   fetchSensors(roomId: number): void {
     this.subscriptions.add(
       this.graficaService.fetchSensorsByRoom(roomId).subscribe(
@@ -67,7 +55,10 @@ export class GraficaComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.toastr.error('Error al obtener los sensores', 'Error');
-          console.error('Error al obtener los sensores de la habitación:', error);
+          console.error(
+            'Error al obtener los sensores de la habitación:',
+            error
+          );
         }
       )
     );

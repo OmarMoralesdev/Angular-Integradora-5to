@@ -9,16 +9,16 @@ import { environment } from '../../../environments/environment';
 })
 export class HabitacionesService {
 
-<<<<<<< HEAD
-  private url = 'http://192.168.252.217:8000/api/v1/habitacion'
-=======
   private url = environment.apiUrl+'/habitacion'
->>>>>>> add8ce828bff365e48314c1ccfe5ae265d557de6
 
   constructor(private http:HttpClient) { }
 
   getHabitacion(): Observable<{data: Habitacion[]}> {
     return this.http.get<{data: Habitacion[]}>(this.url);
+  }
+
+  getHabitacionPorId(id: number): Observable<{msg:string; data: Habitacion}> {
+    return this.http.get<{msg:string; data: Habitacion}>(`${this.url}/${id}`);
   }
 
   postHabitacion(Habitacion: Habitacion):Observable<{msg:string; data:Habitacion}>{

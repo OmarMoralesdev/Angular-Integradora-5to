@@ -5,6 +5,7 @@ import { HabitacionesService } from '../../../../core/services/habitaciones.serv
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SensoresService } from '../../../../core/services/sensores.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sensores-habitacion',
@@ -27,13 +28,31 @@ export class SensoresHabitacionComponent implements OnInit {
 
   constructor(
     public habitacionservice: HabitacionesService,
-    public sensorService: SensoresService
+    public sensorService: SensoresService,
+    private route: ActivatedRoute,
   
   ) {}
 
   ngOnInit(): void {
-    this.mostrarHabitacion();
+this.mostrarHabitacion () 
+    const habitacionId = Number(this.route.snapshot.paramMap.get('id'));
+    if (habitacionId) {
+      this.habitacion.id = habitacionId;
+      this.cargarHabitacion(habitacionId);
+    }
     this.mostrarSensores();
+  }
+
+  cargarHabitacion(id: number) {
+    this.habitacionservice.getHabitacionPorId(id).subscribe({
+      next: (response) => {
+        this.habitacion = response.data;
+        this.habitacionSeleccionada = response.data;
+      },
+      error: (e) => {
+        console.log('Error al cargar la habitación:', e);
+      }
+    });
   }
 
   mostrarHabitacion() {
