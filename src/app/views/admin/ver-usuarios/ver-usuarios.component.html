@@ -1,0 +1,35 @@
+<div class="table-container">
+    <h2 class="table-title">Usuarios</h2>
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+                <th>Ver Habitaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of Usuarios">
+                <td>{{ usuario.name }}</td>
+                <td>{{ usuario.lastname }}</td>
+                <td>
+                    <span [ngClass]="usuario.estado ? 'activo' : 'inactivo'">
+                        {{ usuario.estado ? 'Activo' : 'Inactivo' }}
+                    </span>
+                </td>
+                <td>
+                    <button class="btn" 
+                        [ngClass]="usuario.estado ? 'btn-delete' : 'btn-success'"
+                        (click)="cambiarEstado(usuario)">
+                        {{ usuario.estado ? 'Desactivar' : 'Activar' }}
+                    </button>
+                </td>
+                <td>
+                    <button class="btn">Ver H</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+

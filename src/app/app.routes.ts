@@ -17,6 +17,7 @@ import { ReporteDiarioComponent } from './views/user/reporte/reporte-diario/repo
 import { AltaHabitacionComponent } from './views/user/alta-habitacion/alta-habitacion.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found/not-found.component';
 import { EditarHabitacionComponent } from './views/user/editar-habitacion/editar-habitacion.component';
+import { VerUsuariosComponent } from './views/admin/ver-usuarios/ver-usuarios.component';
 
 export const routes: Routes = [
 
@@ -106,6 +107,10 @@ export const routes: Routes = [
     {
         path: 'editar-perfil',
         component: EditarPerfilComponent
+    },
+    {
+        path: 'ver-usuarios',
+        component: VerUsuariosComponent
     },
     {
         path: '**', component:NotFoundComponent
