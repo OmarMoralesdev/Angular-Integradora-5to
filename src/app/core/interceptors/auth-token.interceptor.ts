@@ -1,8 +1,11 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   // OBTENEMOS EL TOKEN DEL LOCALSTORAGE
   const token = localStorage.getItem('token');
+  const router=inject(Router);
 
   // SU HAY UN TOKEN 
   if (token) {
