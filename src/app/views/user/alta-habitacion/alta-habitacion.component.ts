@@ -5,9 +5,10 @@ import { HabitacionesService } from '../../../core/services/habitaciones.service
 import { Habitacion } from '../../../core/models/habitacion';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BotonVolverComponent } from '../../../shared/components/boton-volver/boton-volver.component';
 @Component({
   selector: 'app-alta-habitacion',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, BotonVolverComponent],
   templateUrl: './alta-habitacion.component.html',
   styleUrl: './alta-habitacion.component.css'
 })

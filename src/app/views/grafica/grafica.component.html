@@ -1,47 +1,64 @@
 <div class="fondo">
-  <div class="container ">
+  <app-boton-volver></app-boton-volver> 
+  <div class="container">
     <div class="row">
-      <br>
-      <div class="col-md-4" *ngFor="let sensor of sensors">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header text-center bg-primary text-white">
-            <h3 class="card-title">{{ sensor.nombre || 'Sensor Desconocido' }}</h3>
-          </div>
-          <div class="card-body text-center">
-
-            <!-- Mostrar mensaje -->
-            <div class="message mb-3">
-              <p class="text-muted" *ngIf="sensor.msg; else noMessage">
-                {{ sensor.msg }}
-              </p>
-              <ng-template #noMessage>
-                <p class="text-muted">Sin mensaje disponible</p>
-              </ng-template>
-            </div>
-
-            <!-- Mostrar valor -->
-            <div class="data">
-              <h4 *ngIf="sensor.value !== null; else noValue" class="text-success">
-                {{ sensor.value }} <span *ngIf="sensor.value === null"> {{ sensor.unidad }}</span>
-              </h4>
-              <ng-template #noValue>
-                <h4 class="text-danger">Sin datos</h4>
-              </ng-template>
-            </div>
-
-          </div>
-          <div class="text-center mt-4">
-            <button
-              class="btn btn-primary"
-              (click)="navigateToReport(sensor.id)"
-              [disabled]="!sensor.id"
-            >
-              Ver Reporte
-            </button>
-          </div>
-       <br>
+      <!-- Mostrar spinner mientras se cargan los sensores -->
+      <div *ngIf="isLoading" class="col-12 text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
         </div>
       </div>
+
+      <!-- Mostrar sensores cuando se hayan cargado -->
+      <ng-container *ngIf="!isLoading && sensors.length > 0; else noSensors">
+        <div class="col-md-4 col-sm-6 col-12" *ngFor="let sensor of sensors">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header text-center  text-white">
+              <h3 class="card-title">{{ sensor.nombre || 'Sensor Desconocido' }}</h3>
+            </div>
+            <div class="card-body text-center">
+              <!-- Mostrar mensaje -->
+              <div class="message mb-3">
+                <p class="text-muted" *ngIf="sensor.msg; else noMessage">
+                  {{ sensor.msg }}
+                </p>
+                <ng-template #noMessage>
+                  <p class="text-muted">Sin mensaje disponible</p>
+                </ng-template>
+              </div>
+
+              <!-- Mostrar valor -->
+              <div class="data">
+                <h4 *ngIf="sensor.value !== null; else noValue" class="text-success">
+                  {{ sensor.value }} <span *ngIf="sensor.value === null"> {{ sensor.unidad }}</span>
+                </h4>
+                <ng-template #noValue>
+                  <h4 class="text-danger">Sin datos</h4>
+                </ng-template>
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <button
+                class="btn btn-primary"
+                (click)="navigateToReport(sensor.id)"
+                [disabled]="!sensor.id"
+              >
+                Ver Reporte
+              </button>
+             
+            </div>
+            <br>
+          </div>
+          
+        </div>
+      </ng-container>
+
+      <!-- Mostrar mensaje si no hay sensores disponibles -->
+      <ng-template #noSensors>
+        <div class="col-12 text-center">
+          <h4 class="text-muted">No hay sensores disponibles</h4>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -1,80 +1,103 @@
-/* Fondo general */
-.fondo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
-  height: 100%;
+
+/* Ajustar el contenedor para que sea responsivo */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 15px;
 }
 
-
+/* Estilo para las tarjetas */
 .card {
+  border: none;
   border-radius: 10px;
   overflow: hidden;
-  height: 100%; /* Asegura que las tarjetas ocupen todo el espacio disponible */
-  display: flex;
-  flex-direction: column; /* Asegura que los elementos internos se alineen verticalmente */
-  justify-content: space-between; /* Espaciado uniforme entre los elementos */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-body {
-  flex-grow: 1; /* Permite que el cuerpo de la tarjeta ocupe el espacio restante */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra verticalmente el contenido */
-  align-items: center; /* Centra horizontalmente el contenido */
-}
-
-.card {
-  min-height: 100%; /* Ajusta este valor según tus necesidades */
-  
-}
-.row > .col-md-4 {
-  margin-bottom: 20px; /* Espaciado vertical entre filas */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  font-size: 1.2rem;
+  background-color: #6f42c1; 
+  font-size: 1.25rem;
   font-weight: bold;
+  padding: 15px;
 }
 
 .card-body {
   padding: 20px;
 }
 
-/* hover card */
-.card:hover {
-  transform: scale(1.05);
-  transition: transform 0.5s;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
-}
-
-
-
-/* Mensajes */
-.message p {
-  font-size: 1rem;
-  margin: 0;
-}
-
-/* Valores */
 .data h4 {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Botón */
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+.message p {
   font-size: 1rem;
-  padding: 10px 20px;
-  border-radius: 5px;
+  color: #6c757d;
 }
 
-.btn-primary:disabled {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  cursor: not-allowed;
+/* Botón estilizado */
+.btn-primary {
+  background-color: #8b09af;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Spinner centrado */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Mensaje de "No hay sensores" */
+.text-muted {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .card-header {
+    font-size: 1rem;
+  }
+
+  .data h4 {
+    font-size: 1.2rem;
+  }
+
+  .btn-primary {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .fondo {
+    padding: 10px;
+  }
+
+  .card-header {
+    font-size: 0.9rem;
+  }
+
+  .data h4 {
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
 }

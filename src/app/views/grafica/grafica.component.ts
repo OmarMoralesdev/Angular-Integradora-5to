@@ -5,10 +5,11 @@ import { PusherService } from '../../core/services/webSockets/pusher.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { BotonVolverComponent } from '../../shared/components/boton-volver/boton-volver.component';
 
 @Component({
   selector: 'app-grafica',
-  imports: [NgxChartsModule],
+  imports: [NgxChartsModule, BotonVolverComponent],
   templateUrl: './grafica.component.html',
   styleUrl: './grafica.component.css',
 })
@@ -18,6 +19,8 @@ export class GraficaComponent implements OnInit, OnDestroy {
   containerHeight: number = 150; // Valor inicial
   previousValue: number = 70;
   units: string = 'counts';
+  isLoading: boolean = true; // Nueva variable para el estado de carga
+
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -45,20 +48,19 @@ export class GraficaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
   fetchSensors(roomId: number): void {
+    this.isLoading = true; // Inicia la carga
     this.subscriptions.add(
       this.graficaService.fetchSensorsByRoom(roomId).subscribe(
         (sensors) => {
-          console.log('Sensores de la habitación:', sensors);
-          this.sensors = sensors; // Asigna los sensores al arreglo del componente
+          console.log('Sensores de la habitación:', sensors); // Verifica los datos aquí
+          this.sensors = sensors; // Asigna los sensores cargados
+          this.isLoading = false; // Finaliza la carga
         },
         (error) => {
           this.toastr.error('Error al obtener los sensores', 'Error');
-          console.error(
-            'Error al obtener los sensores de la habitación:',
-            error
-          );
+          console.error('Error al obtener los sensores de la habitación:', error);
+          this.isLoading = false; // Finaliza la carga incluso en caso de error
         }
       )
     );

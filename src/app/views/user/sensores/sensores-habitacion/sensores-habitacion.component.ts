@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SensoresService } from '../../../../core/services/sensores.service';
 import { ActivatedRoute } from '@angular/router';
+import { BotonVolverComponent } from '../../../../shared/components/boton-volver/boton-volver.component';
 
 @Component({
   selector: 'app-sensores-habitacion',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BotonVolverComponent],
   templateUrl: './sensores-habitacion.component.html',
   styleUrl: './sensores-habitacion.component.css'
 })

@@ -19,5 +19,8 @@
     justify-content: center;
     background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
     height: 100%;
+    min-height: calc(100vh - var(--nav-height) - var(--footer-height)); /* Ajusta según el tamaño de la navegación y el pie */
+    overflow-y: auto; /* Permitir desplazamiento vertical */
+    padding: 20px; /* Mantener el espaciado interno */
   }
   
