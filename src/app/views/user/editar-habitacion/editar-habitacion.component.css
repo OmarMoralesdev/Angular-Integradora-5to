@@ -1,11 +1,13 @@
-.fondo {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
-    height: 100%;
+    background: transparent; 
+    padding: 20px; 
+    box-sizing: border-box;
 }
-.fondoFormulario{
+
+.fondoFormulario {
     background: #FFFF;
     border-radius: 30px;
     box-shadow: 0 0px 30px rgba(0.2, 0.2, 0.2, 0.2);

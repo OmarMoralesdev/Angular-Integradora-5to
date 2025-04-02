@@ -5,10 +5,11 @@ import { Habitacion } from '../../../core/models/habitacion';
 import { ActivatedRoute, Router } from '@angular/router'; // Para obtener el ID de la 
 import { CommonModule } from '@angular/common'; // Importar CommonModule
 import { ToastrService } from 'ngx-toastr';
+import { BotonVolverComponent } from '../../../shared/components/boton-volver/boton-volver.component';
 
 @Component({
   selector: 'app-editar-habitacion',
-  imports: [ReactiveFormsModule, CommonModule ],
+  imports: [ReactiveFormsModule, CommonModule, BotonVolverComponent ],
   templateUrl: './editar-habitacion.component.html',
   styleUrl: './editar-habitacion.component.css'
 })

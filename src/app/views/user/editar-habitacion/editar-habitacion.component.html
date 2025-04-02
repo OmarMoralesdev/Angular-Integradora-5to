@@ -1,13 +1,21 @@
 <div class="fondo">
+    <app-boton-volver></app-boton-volver> 
+
+  <div class="container">
     <div class="fondoFormulario">
-      <i class="bi bi-house-door-fill iconoCasa"></i> 
+      <i class="bi bi-house-door-fill iconoCasa"></i>
       <form [formGroup]="EditForm" (ngSubmit)="actualizarHabi()">
         <h1>Edita tu habitación 😊✏</h1>
         <div class="input-box">
-          <input id="name" placeholder="Nombre de la Habitación" type="text" formControlName="name" />
+          <input
+            id="name"
+            placeholder="Nombre de la Habitación"
+            type="text"
+            formControlName="name"
+          />
         </div>
         <button class="btn" type="submit">Editar Habitación</button>
       </form>
     </div>
   </div>
-  
+</div>

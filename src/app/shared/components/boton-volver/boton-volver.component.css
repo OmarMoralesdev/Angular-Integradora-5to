@@ -1,0 +1,12 @@
+button {
+  font-size: 1rem;
+  padding: 10px; /* Ajusta el padding para que el botón sea proporcional */
+  border-radius: 50%; /* Hace que el botón sea redondo */
+  cursor: pointer;
+  width: 50px; /* Asegúrate de que el ancho y alto sean iguales */
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5C6BC0; 
+}

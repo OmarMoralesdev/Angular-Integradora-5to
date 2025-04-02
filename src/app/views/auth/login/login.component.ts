@@ -59,7 +59,7 @@ export class LoginComponent {
           if (this.service.isAdmin()) {
             this.ruta.navigate(['/Admin-Dashboard']);
           } else {
-            this.ruta.navigate(['/User-Dashboard']);
+            this.ruta.navigate(['/misHabitaciones']);
           }
         },
         error: (error) => {

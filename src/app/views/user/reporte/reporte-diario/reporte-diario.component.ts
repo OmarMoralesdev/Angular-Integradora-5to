@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common'; // Importa Location
+import { BotonVolverComponent } from '../../../../shared/components/boton-volver/boton-volver.component';
 
 
 
 @Component({
   selector: 'app-reporte-diario',
-  imports: [NgxChartsModule, CommonModule, FormsModule],
+  imports: [NgxChartsModule, CommonModule, FormsModule, BotonVolverComponent],
   templateUrl: './reporte-diario.component.html',
   styleUrl: './reporte-diario.component.css',
 })
