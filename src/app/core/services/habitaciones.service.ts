@@ -17,6 +17,10 @@ export class HabitacionesService {
   getHabitacion(): Observable<{data: Habitacion[]}> {
     return this.http.get<{data: Habitacion[]}>(this.url);
   }
+
+  getHabitacionPorIdDeUsuario(id: number): Observable<{msg:string; data: Habitacion[]}> {
+    return this.http.get<{msg:string; data: Habitacion[]}>(`${environment.apiUrl}/python/habitaciones/${id}`);
+  }
   
   getHabitacionId(id:number):Observable<Habitacion>{
     const url = `${this.una}/${id}`;

@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { UserServiceService } from '../../../core/services/user-service.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { User } from '../../../core/models/user';
 import { InfoPerfil } from '../../../core/models/info-perfil';
 import { ToastrService } from 'ngx-toastr';
@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ver-usuarios',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './ver-usuarios.component.html',
   styleUrl: './ver-usuarios.component.css'
 })

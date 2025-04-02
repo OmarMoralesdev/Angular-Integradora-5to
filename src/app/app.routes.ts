@@ -88,8 +88,13 @@ export const routes: Routes = [
     },
     {
         //RUTA PARA VER MIS HABITACIONES 
-        path: 'misHabitaciones',
-        component: HabitacionesComponent  ,canActivate: [authTokenGuard]
+        path: 'misHabitaciones/:id',
+                component: HabitacionesComponent  ,canActivate: [authTokenGuard]
+    },
+    {
+        //RUTA PARA VER MIS HABITACIONES 
+        path: 'misHabitaciones/',
+                component: HabitacionesComponent  ,canActivate: [authTokenGuard]
     },
     {
         //RUTA PARA DAR DE ALTA HABITACION
