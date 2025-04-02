@@ -19,6 +19,7 @@ import { NotFoundComponent } from './shared/components/not-found/not-found/not-f
 import { authTokenGuard } from './core/guards/auth-token.guard';
 import { EditarHabitacionComponent } from './views/user/editar-habitacion/editar-habitacion.component';
 import { VerUsuariosComponent } from './views/admin/ver-usuarios/ver-usuarios.component';
+import { ReenvioComponent } from './views/auth/reenvio/reenvio.component';
 
 export const routes: Routes = [
 
@@ -45,6 +46,11 @@ export const routes: Routes = [
         //RUTA PARA QUE LOS USUARIOS SE REGISTREN
         path: 'Register',
         component: RegisterComponent
+    },
+    //REENVIO DE CORREO
+    {
+        path: 'reenvio',
+        component: ReenvioComponent
     },
     {
         path: 'enviar-correo',

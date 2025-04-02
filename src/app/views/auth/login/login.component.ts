@@ -62,9 +62,16 @@ export class LoginComponent {
             this.ruta.navigate(['/misHabitaciones']);
           }
         },
+
         error: (error) => {
           console.error(error);
-          this.tostada.error('credenciales invalidas', 'Error');
+          if(error.status===403)
+          {
+            this.tostada.error('Cuenta Inactiva', 'Error')
+          }
+          if(error.status===401){
+            this.tostada.error('credenciales invalidas', 'Error');
+          }
         }
       });
     }
