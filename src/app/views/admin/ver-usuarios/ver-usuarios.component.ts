@@ -15,6 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class VerUsuariosComponent implements OnInit {
   Usuarios:User[]=[];
+  pagina:number=1;
+  registros:number=6;
 
   constructor(public userService:UserServiceService, public router:Router, public tostada:ToastrService){}
 
@@ -46,6 +48,27 @@ export class VerUsuariosComponent implements OnInit {
         this.tostada.error('Error al actualizar la cuenta', 'Error')
       }
     });
+  }
+
+  get paginaActual() {
+    const indice = (this.pagina - 1) * this.registros;
+    return this.Usuarios.slice(indice, indice + this.registros);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.Usuarios.length / this.registros);
+  }
+
+  siguiente() {
+    if (this.pagina < this.totalPaginas) {
+      this.pagina++;
+    }
+  }
+
+  anterior() {
+    if (this.pagina > 1) {
+      this.pagina--;
+    }
   }
 
 }
