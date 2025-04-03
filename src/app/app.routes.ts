@@ -21,6 +21,7 @@ import { EditarHabitacionComponent } from './views/user/editar-habitacion/editar
 import { VerUsuariosComponent } from './views/admin/ver-usuarios/ver-usuarios.component';
 import { ReenvioComponent } from './views/auth/reenvio/reenvio.component';
 import { rolesGuard } from './core/guards/roles.guard';
+import { InautorizadoComponent } from './shared/components/inautorizado/inautorizado/inautorizado.component';
 
 export const routes: Routes = [
 
@@ -98,7 +99,7 @@ export const routes: Routes = [
         path: 'misHabitaciones/:id',
         component: HabitacionesComponent,
         canActivate: [authTokenGuard, rolesGuard],
-        data: { roles: [3] }
+        data: { roles: [1] }
     },
     {
         //RUTA PARA VER MIS HABITACIONES 
@@ -126,6 +127,10 @@ export const routes: Routes = [
     {
         path: 'ver-usuarios',
         component: VerUsuariosComponent
+    },
+    {
+        path: 'inautorizado'  ,
+        component: InautorizadoComponent
     },
     { 
         path: 'not-found', component: NotFoundComponent 

@@ -8,18 +8,29 @@ export const rolesGuard: CanActivateFn = (route, state) => {
 
   try {
     const requiredRoles = route.data?.['roles'] || [];
-    const rol = authService.getRolUser();
-    
-    if (requiredRoles.length > 0){
-      if (!requiredRoles.includes(rol)){
-        router.navigate(['/not-found']);
-        return false;
+    let rol = -1
+    authService.getRolUser().subscribe({
+      next: (data) => {
+        rol = data.data
+        if (requiredRoles.length > 0){
+          if (!requiredRoles.includes(rol)){
+            router.navigate(['/inautorizado']);
+            return false;
+          }
+        }
+        console.log(rol)
+        return true
+      },
+      error: (error) => {
+        router.navigate(['/inautorizado']);
+        rol = -1
+        return false
       }
-    }
+    })
     return true
   }
   catch (error) {
-    router.navigate(['/not-found']);
+    router.navigate(['/inautorizado']);
     return false
   }
 };
