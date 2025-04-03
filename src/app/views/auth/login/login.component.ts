@@ -57,7 +57,7 @@ export class LoginComponent {
           localStorage.setItem('token',response.access_token);
           this.tostada.success('Login exitoso');
           if (this.service.isAdmin()) {
-            this.ruta.navigate(['/Admin-Dashboard']);
+            this.ruta.navigate(['/ver-usuarios']);
           } else {
             this.ruta.navigate(['/misHabitaciones']);
           }

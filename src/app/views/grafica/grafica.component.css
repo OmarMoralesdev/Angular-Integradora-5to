@@ -20,7 +20,7 @@
 }
 
 .card-header {
-  background-color: #6f42c1; 
+  background-color: #3F51B5; 
   font-size: 1.25rem;
   font-weight: bold;
   padding: 15px;
@@ -42,7 +42,7 @@
 
 /* Botón estilizado */
 .btn-primary {
-  background-color: #8b09af;
+  background-color: #3F51B5;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;

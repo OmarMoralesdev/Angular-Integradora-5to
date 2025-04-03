@@ -43,4 +43,11 @@ export class GraficaService {
       limit: recordCount
     });
   }
+
+  desactivarBuzzer(): Observable<any> {
+    const url = `${this.apiUrl}/buzzer/apagar`;
+    const body = { estado: 'VIB01:0' }; 
+    return this.http.post<any>(url, body);
+  }
+  
 }

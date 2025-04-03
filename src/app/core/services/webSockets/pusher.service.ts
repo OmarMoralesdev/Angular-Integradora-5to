@@ -18,7 +18,6 @@ export class PusherService {
     this.channel = this.pusher.subscribe('sensores');
 
     this.channel.bind('sensor-actualizado', (data: any) => {
-      console.log('Mensaje recibido:', data);
       this.sensorUpdated.next(data);
 
     });

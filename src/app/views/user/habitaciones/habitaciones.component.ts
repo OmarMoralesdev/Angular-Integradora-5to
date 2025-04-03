@@ -6,22 +6,24 @@ import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { SpinnerCargaComponent } from '../../../shared/components/spinner/spinner-carga/spinner-carga.component';
 
 @Component({
   selector: 'app-habitaciones',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SpinnerCargaComponent],
   templateUrl: './habitaciones.component.html',
   styleUrl: './habitaciones.component.css',
 })
 export class HabitacionesComponent implements OnInit {
   habitaciones: Habitacion[] = [];
   id: number | null = null;
+  isLoading: boolean = true; // Nueva propiedad para controlar el estado de carga
 
   constructor(
     private habitacionservice: HabitacionesService,
     private tostada: ToastrService,
     private route: ActivatedRoute,
-    private location: Location // Agregado para manejar la navegación hacia atrás
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -36,31 +38,37 @@ export class HabitacionesComponent implements OnInit {
   }
 
   private cargarHabitacionPorId(id: number): void {
+    this.isLoading = true; // Inicia la carga
     this.habitacionservice.getHabitacionPorIdDeUsuario(id).subscribe({
       next: (response) => {
         if (response.msg === 'El usuario no tiene habitaciones asignadas.') {
           this.tostada.warning('No tienes habitaciones asignadas.', 'Aviso');
-          this.location.back(); 
-          return;
+          this.habitaciones = []; // Asegurarse de que no haya habitaciones
+        } else {
+          this.habitaciones = response.data;
         }
-        this.habitaciones = response.data;
+        this.isLoading = false; // Finaliza la carga
       },
       error: (e) => {
         this.tostada.error(e.msg || 'Error al cargar la habitación.', 'Error');
         console.log(e);
+        this.isLoading = false; // Finaliza la carga en caso de error
         this.location.back();
       },
     });
   }
 
   mostrarHabitacion(): void {
+    this.isLoading = true; // Inicia la carga
     this.habitacionservice.getHabitacion().subscribe({
       next: (response) => {
         this.habitaciones = response.data;
+        this.isLoading = false; // Finaliza la carga
       },
       error: (e) => {
         this.tostada.error('Error al cargar las habitaciones.', 'Error');
         console.error('Error al cargar las habitaciones:', e);
+        this.isLoading = false; // Finaliza la carga en caso de error
       },
     });
   }

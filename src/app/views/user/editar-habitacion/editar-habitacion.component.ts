@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router'; // Para obtener el ID 
 import { CommonModule } from '@angular/common'; // Importar CommonModule
 import { ToastrService } from 'ngx-toastr';
 import { BotonVolverComponent } from '../../../shared/components/boton-volver/boton-volver.component';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-editar-habitacion',
   imports: [ReactiveFormsModule, CommonModule, BotonVolverComponent ],
@@ -21,7 +21,8 @@ export class EditarHabitacionComponent implements OnInit {
     private habitacionService:HabitacionesService,
     private route:ActivatedRoute,
     private router:Router,
-    private tostada:ToastrService
+    private tostada:ToastrService,
+    private location: Location 
   ){
     this.EditForm= new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)])
@@ -35,14 +36,17 @@ export class EditarHabitacionComponent implements OnInit {
   obtenerH(){
     this.habitacionService.getHabitacionId(this.HabitacionId).subscribe({
       next:(response)=>{
-        console.log(response.name)
+        console.log(response.data.name)
         const idhabitacion=response;
         this.EditForm.patchValue({
-          name:idhabitacion.name,
+          name:idhabitacion.data.name
+          ,
         });
       },
       error:(err)=>{
         console.error('error', err);
+        this.tostada.error('Error al cargar la habitación', 'Error');
+        this.location.back(); // Regresar a la página anterior en caso de error
       }
     })
   }
