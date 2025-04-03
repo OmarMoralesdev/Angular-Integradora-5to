@@ -87,5 +87,9 @@ private router = inject(Router);
       return false;
     }
   }
+
+  getRolUser(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/auth/ver-rol');
+  }
   
 }

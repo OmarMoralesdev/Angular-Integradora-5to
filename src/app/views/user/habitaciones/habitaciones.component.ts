@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 import { SpinnerCargaComponent } from '../../../shared/components/spinner/spinner-carga/spinner-carga.component';
 
 @Component({
@@ -17,19 +18,34 @@ import { SpinnerCargaComponent } from '../../../shared/components/spinner/spinne
 export class HabitacionesComponent implements OnInit {
   habitaciones: Habitacion[] = [];
   id: number | null = null;
+  mostrar: boolean = false
   isLoading: boolean = true; // Nueva propiedad para controlar el estado de carga
 
   constructor(
     private habitacionservice: HabitacionesService,
     private tostada: ToastrService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     this.id = idParam ? Number(idParam) : null;
 
+    this.authService.getRolUser().subscribe({
+      next: (response) => {
+        if (response.data == 2){
+          this.mostrar = true
+        }
+        else {
+          this.mostrar = false
+        }
+      },
+      error: (error) => {
+        this.tostada.error('Error al cargar el rol.', 'Error');
+      }
+    })
     if (this.id) {
       this.cargarHabitacionPorId(this.id);
     } else {

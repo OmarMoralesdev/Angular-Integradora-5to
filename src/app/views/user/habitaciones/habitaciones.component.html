@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="titulo-habitaciones">Habitaciones</h1>
-      <button routerLink="/nuevaHabitacion" class="btn">
+      <button *ngIf="mostrar" routerLink="/nuevaHabitacion" class="btn">
         REGISTRAR NUEVA HABITACIÓN
       </button>
     </div>
@@ -20,6 +20,7 @@
             <div class="card text-center">
               <div class="dropdown text-end">
                 <button
+                *ngIf="mostrar"
                   class="btnhamburgesa btn-secondary dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton{{ habitacion.id }}"
@@ -63,6 +64,7 @@
                     Ver datos
                   </a>
                   <a
+                  *ngIf="mostrar"
                     class="btn btn-primary btn2"
                     [routerLink]="['/sensorHabitacion', habitacion.id]"
                   >

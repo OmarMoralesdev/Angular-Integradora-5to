@@ -20,6 +20,7 @@ import { authTokenGuard } from './core/guards/auth-token.guard';
 import { EditarHabitacionComponent } from './views/user/editar-habitacion/editar-habitacion.component';
 import { VerUsuariosComponent } from './views/admin/ver-usuarios/ver-usuarios.component';
 import { ReenvioComponent } from './views/auth/reenvio/reenvio.component';
+import { rolesGuard } from './core/guards/roles.guard';
 
 export const routes: Routes = [
 
@@ -95,7 +96,9 @@ export const routes: Routes = [
     {
         //RUTA PARA VER MIS HABITACIONES 
         path: 'misHabitaciones/:id',
-                component: HabitacionesComponent  ,canActivate: [authTokenGuard]
+        component: HabitacionesComponent,
+        canActivate: [authTokenGuard, rolesGuard],
+        data: { roles: [3] }
     },
     {
         //RUTA PARA VER MIS HABITACIONES 
@@ -124,8 +127,11 @@ export const routes: Routes = [
         path: 'ver-usuarios',
         component: VerUsuariosComponent
     },
+    { 
+        path: 'not-found', component: NotFoundComponent 
+    },
     {
-        path: '**', component:NotFoundComponent
+        path: '**', redirectTo: 'not-found' 
     }
 
 
