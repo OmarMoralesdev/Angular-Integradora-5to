@@ -1,47 +1,50 @@
-<div class="container mt-4">
-    <h2 class="text-center">Usuarios</h2>
-    <div class="table-responsive">
-        <table class="table-hover table  text-center">
-            <thead class="bg-info">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                    <th>Ver Habitaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let usuario of paginaActual">
-                    <td>{{ usuario.name }}</td>
-                    <td>{{ usuario.lastname }}</td>
-                    <td>
-                        <span class="badge" [ngClass]="usuario.estado ? 'badge-success' : 'badge-danger'">
-                            {{ usuario.estado ? 'Activo' : 'Inactivo' }}
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn" 
-                            [ngClass]="usuario.estado ? 'btn-danger' : 'btn-success'"
-                            (click)="cambiarEstado(usuario)">
-                            {{ usuario.estado ? 'Desactivar' : 'Activar' }}
-                        </button>
-                    </td>
-                    <td>
-                        <a
-                        class="btn btn-primary btn2"
-                        [routerLink]="['/misHabitaciones', usuario.id]"
-                      >
-                        Ver Sensores
-                      </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Paginación -->
-    <div class="pagination-container">
-        <button class="btn" (click)="anterior()" [disabled]="pagina === 1">Anterior</button>
-        <span class="page-indicator">Página {{ pagina }} de {{ totalPaginas }}</span>
-        <button class="btn" (click)="siguiente()" [disabled]="pagina === totalPaginas">Siguiente </button>
+<div class="fondo">
+    <div class="container mt-4">
+        <h2 class="text-center">Usuarios</h2>
+        <div class="table-responsive">
+            <table class="table-hover table  text-center">
+                <thead class="bg-info">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                        <th>Ver Habitaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of paginaActual">
+                        <td>{{ usuario.name }}</td>
+                        <td>{{ usuario.lastname }}</td>
+                        <td>
+                            <span class="badge" [ngClass]="usuario.estado ? 'badge-success' : 'badge-danger'">
+                                {{ usuario.estado ? 'Activo' : 'Inactivo' }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn" 
+                                [ngClass]="usuario.estado ? 'btn-danger' : 'btn-success'"
+                                (click)="cambiarEstado(usuario)">
+                                {{ usuario.estado ? 'Desactivar' : 'Activar' }}
+                            </button>
+                        </td>
+                        <td>
+                            <a
+                            class="btn btn-primary btn2"
+                            [routerLink]="['/misHabitaciones', usuario.id]"
+                          >
+                            Ver Sensores
+                          </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Paginación -->
+        <div class="pagination-container">
+            <button class="btn" (click)="anterior()" [disabled]="pagina === 1">Anterior</button>
+            <span class="page-indicator">Página {{ pagina }} de {{ totalPaginas }}</span>
+            <button class="btn" (click)="siguiente()" [disabled]="pagina === totalPaginas">Siguiente </button>
+        </div>
     </div>
+    
 </div>

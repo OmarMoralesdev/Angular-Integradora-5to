@@ -3,21 +3,37 @@
 
   <div class="container reporte-diario">
     <h2 class="titulo">Reporte Diario</h2>
-    <div *ngIf="maxValor !== null && minValor !== null && promedio !== null; else noData" class="datos">
-      <div class="dato">
-        <p><strong>Máximo Valor:</strong></p>
-        <p class="valor">{{ maxValor }}</p>
+
+    <!-- Mostrar spinner mientras se cargan los datos -->
+    <div *ngIf="isLoading" class="text-center">
+      <app-spinner-carga></app-spinner-carga>
+
+    </div>
+
+    <!-- Mostrar datos o mensaje de "No hay datos disponibles" cuando se hayan cargado -->
+    <div *ngIf="!isLoading">
+      <div *ngIf="maxValor !== null && minValor !== null && promedio !== null; else noData" class="datos">
+        <div class="dato">
+          <p><strong>Máximo Valor:</strong></p>
+          <p class="valor">{{ maxValor }}</p>
+        </div>
+        <div class="dato">
+          <p><strong>Mínimo Valor:</strong></p>
+          <p class="valor">{{ minValor }}</p>
+        </div>
+        <div class="dato">
+          <p><strong>Promedio:</strong></p>
+          <p class="valor">{{ promedio }}</p>
+        </div>
       </div>
-      <div class="dato">
-        <p><strong>Mínimo Valor:</strong></p>
-        <p class="valor">{{ minValor }}</p>
-      </div>
-      <div class="dato">
-        <p><strong>Promedio:</strong></p>
-        <p class="valor">{{ promedio }}</p>
+      <ng-template #noData>
+        <p class="mensaje-no-datos">No hay datos disponibles para mostrar.</p>
+      </ng-template>
+
+      <!-- Botón para desactivar el buzzer -->
+      <div *ngIf="buzzerVisible" class="buzzer-container">
+        <button class="btn btn-danger" (click)="desactivarBuzzer()">Desactivar Buzzer</button>
       </div>
     </div>
-    <ng-template #noData>
-      <p class="mensaje-no-datos">No hay datos disponibles para mostrar.</p>
-    </ng-template>
+  </div>
 </div>

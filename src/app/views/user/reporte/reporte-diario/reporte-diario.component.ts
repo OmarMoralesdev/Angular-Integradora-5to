@@ -5,14 +5,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Location } from '@angular/common'; // Importa Location
+import { Location } from '@angular/common';
 import { BotonVolverComponent } from '../../../../shared/components/boton-volver/boton-volver.component';
-
-
+import { SpinnerCargaComponent } from '../../../../shared/components/spinner/spinner-carga/spinner-carga.component';
 
 @Component({
   selector: 'app-reporte-diario',
-  imports: [NgxChartsModule, CommonModule, FormsModule, BotonVolverComponent],
+  imports: [NgxChartsModule, CommonModule, FormsModule, BotonVolverComponent, SpinnerCargaComponent],
   templateUrl: './reporte-diario.component.html',
   styleUrl: './reporte-diario.component.css',
 })
@@ -20,6 +19,8 @@ export class ReporteDiarioComponent implements OnInit {
   maxValor: number | null = null;
   minValor: number | null = null;
   promedio: number | null = null;
+  buzzerVisible: boolean = false;
+  isLoading: boolean = true; 
 
   constructor(
     private graficaService: GraficaService,
@@ -32,12 +33,19 @@ export class ReporteDiarioComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id && !isNaN(+id)) {
       this.loadStats(+id);
+
+      
+      if (+id === 4) {
+        this.buzzerVisible = true;
+      }
     } else {
       this.toastr.error('ID no válido', 'Error');
+      this.isLoading = false; // Finaliza la carga si el ID no es válido
     }
   }
 
   loadStats(id: number) {
+    this.isLoading = true; // Inicia la carga
     this.graficaService.fetchEstadisticas(id).subscribe(
       (data) => {
         if (data) {
@@ -49,20 +57,29 @@ export class ReporteDiarioComponent implements OnInit {
             this.toastr.info('No hay registros el día de hoy', 'Información');
           }
         }
+        this.isLoading = false; // Finaliza la carga
       },
       (error) => {
-        let errorMessage = 'Ocurrió un error inesperado';
-        if (error.error?.details) {
-          if (typeof error.error.details === 'string') {
-            errorMessage = error.error.details; // Si es una cadena, úsala directamente
-          } else if (typeof error.error.details === 'object') {
-            errorMessage = Object.values(error.error.details).join(', '); // Combina los valores del objeto
-          }
-        } else if (error.message) {
-          errorMessage = error.message; // Usa el mensaje de error si está disponible
+        this.toastr.error('Error al cargar las estadísticas', 'Error');
+        this.isLoading = false; // Finaliza la carga en caso de error
+        this.location.back();
+      }
+    );
+  }
+
+  desactivarBuzzer() {
+    this.graficaService.desactivarBuzzer().subscribe(
+      (response) => {
+        if (response.msg === 'Buzzer desactivado') {
+          this.toastr.success('Buzzer desactivado', 'Éxito');
+        } else {
+          this.toastr.error('Error al desactivar el buzzer', 'Error');
         }
-        this.toastr.error(errorMessage, 'Error');
-        this.location.back();      }
+      },
+      (error) => {
+        console.error(error);
+        this.toastr.error('Error al desactivar el buzzer', 'Error');
+      }
     );
   }
 }

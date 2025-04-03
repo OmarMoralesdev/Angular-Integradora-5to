@@ -102,7 +102,7 @@ export const routes: Routes = [
     },
     {
         //RUTA PARA VER MIS HABITACIONES 
-        path: 'misHabitaciones/',
+        path: 'misHabitaciones',
                 component: HabitacionesComponent  ,canActivate: [authTokenGuard]
     },
     {

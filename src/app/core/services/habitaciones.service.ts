@@ -22,9 +22,9 @@ export class HabitacionesService {
     return this.http.get<{msg:string; data: Habitacion[]}>(`${environment.apiUrl}/python/habitaciones/${id}`);
   }
   
-  getHabitacionId(id:number):Observable<Habitacion>{
-    const url = `${this.una}/${id}`;
-    return this.http.get<Habitacion>(url);
+  getHabitacionId(id:number):Observable<any>{
+    const url = `${this.url}/${id}`;
+    return this.http.get<any>(url);
   }
 
   getHabitacionPorId(id: number): Observable<{msg:string; data: Habitacion}> {

@@ -38,3 +38,12 @@
     color: #888;
     margin-top: 20px;
   }
+  .buzzer-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .buzzer-container .btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
