@@ -38,12 +38,29 @@
     font-size: 1.1rem;
 
     &:hover {
-        color: #05d6fb;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        transform: scale(1.05);
+        transform: scale(1.10);
     }
   
 }
+.nav-link.active {
+    position: relative;
+    color: white !important; /* Mantener texto blanco */
+    font-weight: 600;
+}
+
+/* Añadir un pseudoelemento para crear la línea inferior */
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: white; /* Línea blanca para contraste */
+    border-radius: 3px;
+}
+
 
 @media screen and (max-width: 800px){
     .navbar-nav{

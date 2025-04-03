@@ -1,32 +1,123 @@
 .carousel-container {
-    background: linear-gradient(to top, #5C6BC0 20%, #FFFF 100%);
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 100%;
-    overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(92, 107, 192, 0.3);
+  margin: 40px auto;
+  max-width: 95%;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-inner img {
+  max-width: 100%;
+  height: 400px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.carousel-caption {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  padding: 15px 20px;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  
+  h5 {
+    font-size: 1.8rem;
+    color: #3949AB;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
+}
+
+// Mejora de los controles del carrusel
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  
+  &:hover {
+    background-color: #fff;
+    opacity: 1;
+  }
+}
+
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1) grayscale(100%) brightness(30%);
+}
+
+.carousel-indicators {
+  bottom: -5px;
+  
+  button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    margin: 0 5px;
+    
+    &.active {
+      background-color: #fff;
+      transform: scale(1.2);
+    }
+  }
+}
+
+// Asegura que el carrusel sea responsivo
+@media (max-width: 768px) {
+  .carousel-caption {
+    position: relative;
+    display: block !important;
+    background: #f8f9fa;
+    left: 0;
+    transform: none;
+    max-width: 100%;
+    border-radius: 0 0 8px 8px;
+    padding: 15px;
   }
   
   .carousel-inner img {
-    max-width: 100%; /* Asegura que la imagen no sobrepase su tamaño original */
-    max-height: 350px; /* Ajusta la altura sin deformar */
-    object-fit: contain; /* Evita que la imagen se deforme */
+    height: 250px;
   }
   
-  .carousel-caption {
-    background: #d3daff6a;
-    
-    h5 {
-        font-size: 2rem;
-        color: #000;
-    }
-    
-    p {
-        font-size: 1.2rem;
-        color: #000;
-    }
-
-   
-    
-    
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 40px;
+    height: 40px;
+  }
 }

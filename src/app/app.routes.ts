@@ -25,10 +25,6 @@ import { InautorizadoComponent } from './shared/components/inautorizado/inautori
 
 export const routes: Routes = [
 
-    // {
-    //     path: '',
-    //     component: GraficaComponent
-    // },
     {
         path: '',
         component: IndexComponent
@@ -114,7 +110,7 @@ export const routes: Routes = [
     {
         //RUTA PARA ACTUALIZAR HABITACION
         path: 'editarHabitacion/:id',
-        component: EditarHabitacionComponent
+        component: EditarHabitacionComponent, canActivate: [authTokenGuard]
     },
     {
         path: 'editar-contraseña',
@@ -126,7 +122,8 @@ export const routes: Routes = [
     },
     {
         path: 'ver-usuarios',
-        component: VerUsuariosComponent
+        component: VerUsuariosComponent, canActivate: [authTokenGuard, rolesGuard],
+        data: { roles: [1] }
     },
     {
         path: 'inautorizado'  ,
