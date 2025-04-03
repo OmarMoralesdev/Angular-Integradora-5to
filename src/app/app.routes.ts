@@ -54,7 +54,7 @@ export const routes: Routes = [
     },
     {
         path: 'enviar-correo',
-        component: EnviarCorreoComponent ,canActivate: [authTokenGuard]
+        component: EnviarCorreoComponent 
     },
     {
         // RUTA PARA LOS SENSORES QUE OFRECEMOS
