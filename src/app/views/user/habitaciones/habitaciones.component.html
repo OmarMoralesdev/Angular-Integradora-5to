@@ -20,6 +20,7 @@
             <div class="card text-center">
               <div class="dropdown text-end">
                 <button
+                *ngIf="mostrar"
                   class="btnhamburgesa btn-secondary dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton{{ habitacion.id }}"
@@ -63,6 +64,7 @@
                     Ver datos
                   </a>
                   <a
+                  *ngIf="mostrar"
                     class="btn btn-primary btn2"
                     [routerLink]="['/sensorHabitacion', habitacion.id]"
                   >
