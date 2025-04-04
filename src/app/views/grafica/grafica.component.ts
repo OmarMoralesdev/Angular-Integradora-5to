@@ -17,11 +17,11 @@ import { SpinnerCargaComponent } from '../../shared/components/spinner/spinner-c
 })
 export class GraficaComponent implements OnInit, OnDestroy {
   sensors: any[] = [];
-
   previousValue: number = 70;
   isLoading: boolean = true;
 
   private subscriptions: Subscription = new Subscription();
+  private updateInterval: any;
 
   constructor(
     private graficaService: GraficaService,
@@ -42,6 +42,10 @@ export class GraficaComponent implements OnInit, OnDestroy {
           this.updateChartData(data);
         })
       );
+
+      this.updateInterval = setInterval(() => {
+        this.fetchSensors(+id, true);
+      }, 10000);
     } else {
       this.toastr.error('ID no válido', 'Error');
     }
@@ -49,30 +53,41 @@ export class GraficaComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
   }
 
-  fetchSensors(roomId: number): void {
-    this.isLoading = true; // Inicia la carga
+  fetchSensors(roomId: number, silent: boolean = false): void {
+    if (!silent) {
+      this.isLoading = true; 
+    }
+
     this.subscriptions.add(
       this.graficaService.fetchSensorsByRoom(roomId).subscribe(
         (sensors) => {
-
-          // Filtrar el sensor con id 5 (ultrasónico)
+    
           this.sensors = sensors
-          .filter(sensor => sensor.id !== 5)
-          .map(sensor => ({
-            ...sensor,
-            value: sensor.value || null, 
-            unidad: sensor.unidad || '' 
-          }));
+            .filter((sensor) => sensor.id !== 5)
+            .map((sensor) => ({
+              ...sensor,
+              value: sensor.value || null,
+              unidad: sensor.unidad || '',
+            }));
 
-
-          this.isLoading = false; // Finaliza la carga
+          if (!silent) {
+            this.isLoading = false;
+          }
         },
         (error) => {
-          this.toastr.error(error.msg || 'Error al cargar los sensores.', 'Error');
-          this.isLoading = false; 
-          this.location.back();
+          if (!silent) {
+            this.toastr.error(
+              error.msg || 'Error al cargar los sensores.',
+              'Error'
+            );
+            this.isLoading = false;
+            this.location.back();
+          }
         }
       )
     );
@@ -92,11 +107,11 @@ export class GraficaComponent implements OnInit, OnDestroy {
       (sensor) => sensor.id === data.sensorId
     );
     if (sensorIndex !== -1) {
-      // Actualizar valor y mensaje del sensor existente
+      
       this.sensors[sensorIndex].value = data.data;
       this.sensors[sensorIndex].msg = data.msg || 'Sin mensaje';
     } else {
-     
+    
     }
   }
 

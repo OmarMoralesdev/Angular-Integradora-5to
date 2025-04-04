@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GraficaService } from '../../../../core/services/webSockets/grafica.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -15,12 +15,13 @@ import { SpinnerCargaComponent } from '../../../../shared/components/spinner/spi
   templateUrl: './reporte-diario.component.html',
   styleUrl: './reporte-diario.component.css',
 })
-export class ReporteDiarioComponent implements OnInit {
+export class ReporteDiarioComponent implements OnInit, OnDestroy {
   maxValor: number | null = null;
   minValor: number | null = null;
   promedio: number | null = null;
   buzzerVisible: boolean = false;
-  isLoading: boolean = true; 
+  isLoading: boolean = true;
+  private updateInterval: any;
 
   constructor(
     private graficaService: GraficaService,
@@ -34,18 +35,30 @@ export class ReporteDiarioComponent implements OnInit {
     if (id && !isNaN(+id)) {
       this.loadStats(+id);
 
-      
       if (+id === 4) {
         this.buzzerVisible = true;
       }
+
+      this.updateInterval = setInterval(() => {
+        this.loadStats(+id, true);
+      }, 10000);
     } else {
       this.toastr.error('ID no válido', 'Error');
-      this.isLoading = false; // Finaliza la carga si el ID no es válido
+      this.isLoading = false;
     }
   }
 
-  loadStats(id: number) {
-    this.isLoading = true; // Inicia la carga
+  ngOnDestroy(): void {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+
+  loadStats(id: number, silent: boolean = false) {
+    if (!silent) {
+      this.isLoading = true; 
+    }
+
     this.graficaService.fetchEstadisticas(id).subscribe(
       (data) => {
         if (data) {
@@ -53,16 +66,20 @@ export class ReporteDiarioComponent implements OnInit {
           this.minValor = data.min_valor;
           this.promedio = data.promedio;
 
-          if (this.maxValor === null && this.minValor === null && this.promedio === null) {
+          if (!silent && this.maxValor === null && this.minValor === null && this.promedio === null) {
             this.toastr.info('No hay registros el día de hoy', 'Información');
           }
         }
-        this.isLoading = false; // Finaliza la carga
+        if (!silent) {
+          this.isLoading = false;
+        }
       },
       (error) => {
-        this.toastr.error('Error al cargar las estadísticas', 'Error');
-        this.isLoading = false; // Finaliza la carga en caso de error
-        this.location.back();
+        if (!silent) {
+          this.toastr.error('Error al cargar las estadísticas', 'Error');
+          this.isLoading = false;
+          this.location.back();
+        }
       }
     );
   }
