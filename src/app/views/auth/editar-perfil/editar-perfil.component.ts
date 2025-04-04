@@ -19,7 +19,7 @@ export class EditarPerfilComponent {
   FormularioEditarPerfil = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/^[\p{L}\s]+$/u)]),
     lastname: new FormControl('', [Validators.required, Validators.pattern(/^[\p{L}\s]+$/u)]),
-    secondLastname: new FormControl('', [Validators.required, Validators.pattern(/^[\p{L}\s]+$/u)]),
+    secondLastname: new FormControl('', [Validators.pattern(/^[\p{L}\s]+$/u)]),
   });
 
   ngOnInit(): void {
