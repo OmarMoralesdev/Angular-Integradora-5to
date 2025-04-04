@@ -5,7 +5,6 @@
       <!-- Mostrar spinner mientras se cargan los sensores -->
       <div *ngIf="isLoading" class="col-12 text-center">
         <app-spinner-carga></app-spinner-carga>
-
       </div>
 
       <!-- Mostrar sensores o mensaje de "No hay sensores disponibles" cuando se hayan cargado -->
@@ -28,23 +27,27 @@
                     </ng-template>
                   </div>
 
-                  <!-- Mostrar valor -->
-                  <div class="data">
-                    <h4 *ngIf="sensor.value !== null; else noValue" class="text-success">
+                  <!-- Mostrar datos solo si el sensor no es 1 o 4 -->
+                  <div class="data" *ngIf="sensor.id !== 1 && sensor.id !== 4">
+                    <h4
+                      *ngIf="sensor.value !== null"
+                      class="text-success"
+                    >
                       {{ sensor.value }} <span *ngIf="sensor.unidad"> {{ sensor.unidad }}</span>
                     </h4>
-                    <ng-template #noValue>
-                      <h4 class="text-danger">
-                        Sin datos <span *ngIf="sensor.unidad">({{ sensor.unidad }})</span>
-                      </h4>
-                    </ng-template>
+                    <h4
+                      *ngIf="sensor.value === null"
+                      class="text-danger"
+                    >
+                      Sin datos <span *ngIf="sensor.unidad">({{ sensor.unidad }})</span>
+                    </h4>
                   </div>
                 </div>
                 <div class="text-center mt-4">
                   <button
                     class="btn btn-primary"
-                    (click)="navigateToReport(sensor.id)"
-                    [disabled]="!sensor.id"
+                    (click)="navigateToReport(sensor.id_pivote)"
+                    [disabled]="!sensor.id_pivote"
                   >
                     Ver Reporte
                   </button>

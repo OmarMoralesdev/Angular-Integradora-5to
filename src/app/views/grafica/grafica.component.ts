@@ -97,21 +97,24 @@ export class GraficaComponent implements OnInit, OnDestroy {
     if (
       !data ||
       typeof data.data === 'undefined' ||
-      typeof data.sensorId === 'undefined'
+      typeof data.sensorId === 'undefined' ||
+      typeof data.habitacionId === 'undefined'
     ) {
       console.error('Datos inválidos recibidos:', data);
       return;
     }
-
-    const sensorIndex = this.sensors.findIndex(
-      (sensor) => sensor.id === data.sensorId
-    );
-    if (sensorIndex !== -1) {
-      
-      this.sensors[sensorIndex].value = data.data;
-      this.sensors[sensorIndex].msg = data.msg || 'Sin mensaje';
+  
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id && +id === data.habitacionId) {
+      const sensorIndex = this.sensors.findIndex(
+        (sensor) => sensor.id === data.sensorId
+      );
+      if (sensorIndex !== -1) {
+        this.sensors[sensorIndex].value = data.data;
+        this.sensors[sensorIndex].msg = data.msg || 'Sin mensaje';
+      }
     } else {
-    
+      console.warn('El ID de la habitación no coincide:', data.habitacionId);
     }
   }
 
