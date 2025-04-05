@@ -23,6 +23,9 @@ export class GraficaComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private updateInterval: any;
 
+  // Mapa para almacenar los datos más recientes recibidos por WebSocket
+  private websocketData: { [sensorId: number]: any } = {};
+
   constructor(
     private graficaService: GraficaService,
     private pusherService: PusherService,
@@ -60,20 +63,24 @@ export class GraficaComponent implements OnInit, OnDestroy {
 
   fetchSensors(roomId: number, silent: boolean = false): void {
     if (!silent) {
-      this.isLoading = true; 
+      this.isLoading = true;
     }
 
     this.subscriptions.add(
       this.graficaService.fetchSensorsByRoom(roomId).subscribe(
         (sensors) => {
-    
           this.sensors = sensors
             .filter((sensor) => sensor.id !== 5)
-            .map((sensor) => ({
-              ...sensor,
-              value: sensor.value || null,
-              unidad: sensor.unidad || '',
-            }));
+            .map((sensor) => {
+              // Combina los datos del WebSocket con los datos del polling
+              const websocketUpdate = this.websocketData[sensor.id];
+              return {
+                ...sensor,
+                value: websocketUpdate?.data || sensor.value || null,
+                unidad: sensor.unidad || '',
+                msg: websocketUpdate?.msg || 'Sin mensaje',
+              };
+            });
 
           if (!silent) {
             this.isLoading = false;
@@ -103,9 +110,12 @@ export class GraficaComponent implements OnInit, OnDestroy {
       console.error('Datos inválidos recibidos:', data);
       return;
     }
-  
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id && +id === data.habitacionId) {
+      // Guarda los datos recibidos en el mapa
+      this.websocketData[data.sensorId] = data;
+
       const sensorIndex = this.sensors.findIndex(
         (sensor) => sensor.id === data.sensorId
       );
