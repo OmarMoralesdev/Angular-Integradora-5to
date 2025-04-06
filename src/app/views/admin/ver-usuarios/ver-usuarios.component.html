@@ -40,10 +40,10 @@
                 </tbody>
             </table>
             <!-- Paginación -->
-        <div class="pagination-container">
-            <button class="btn" (click)="anterior()" [disabled]="pagina === 1">Anterior</button>
+        <div class="pagination">
+            <button class="page-btn" (click)="anterior()" [disabled]="pagina === 1">Anterior</button>
             <span class="page-indicator">Página {{ pagina }} de {{ totalPaginas }}</span>
-            <button class="btn" (click)="siguiente()" [disabled]="pagina === totalPaginas">Siguiente </button>
+            <button class="page-btn" (click)="siguiente()" [disabled]="pagina === totalPaginas">Siguiente </button>
         </div>
     </div>
     

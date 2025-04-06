@@ -58,3 +58,23 @@
     .btn-info:hover {
         background-color: #3F51B5;
     }
+    .pagination {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .page-btn {
+        background:  #38479e;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        margin: 5px;
+        transition: 0.3s;
+    }
+    
+    .page-btn:hover {
+        background: #161141;
+    }
